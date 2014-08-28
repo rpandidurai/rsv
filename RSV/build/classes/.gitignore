@@ -1,0 +1,10 @@
+/Application.properties
+/CustomerDetails.hbm.xml
+/ProductDetails.hbm.xml
+/SalesDetails.hbm.xml
+/SalesEntry.hbm.xml
+/hibernate.cfg.xml
+/log4j.properties
+/sathish/
+/struts.properties
+/struts.xml

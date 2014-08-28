@@ -32,7 +32,7 @@
 					</s:a>
 					<ul>
 						<li><s:a theme="simple" href="recharge.action">Recharge</s:a></li>
-						<li class="last"><s:a theme="simple" href="addRecharge.action">Recharge Entry</s:a></li>
+						<li class="last"><s:a theme="simple" href="addRecharge.action">Recharge Entrys</s:a></li>
 					</ul></li>
 				<li id="liprfSettings" class="has-sub"><a href="settings.action"><span class="fa-cog"></span><span>Settings</span></a>
 <!-- 					<ul> -->
