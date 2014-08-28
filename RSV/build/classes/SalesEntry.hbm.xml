@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+	<class name="sathish.app.model.SalesEntry" table="SALES_ENTRY">
+		<meta attribute="class-description">
+			This class contains the Product details.
+		</meta>
+		<id name="salesEntryId" type="int" column="SALES_ENTRY_ID" >
+			<generator class="native" />
+		</id>
+		<list name="salesDetailsList" cascade="all" >
+			<key column="SALES_ENTRY_ID"  />
+			<list-index column="idx" />
+			<one-to-many class="sathish.app.model.SalesDetails" />
+		</list>
+		<property name="billNo" column="BILL_NUMBER" />
+		<property name="customerName" column="CUSTOMER_NAME" />
+		<property name="entryDate" column="SALES_ENTRY_DATE" />
+	</class>
+</hibernate-mapping>

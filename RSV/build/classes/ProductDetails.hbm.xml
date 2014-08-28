@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+	<class name="sathish.app.model.ProductDetails" table="PRODUCT_DETAILS">
+		<meta attribute="class-description">
+			This class contains the Product details.
+		</meta>
+		<id name="productId" type="int" column="PRODUCT_ID">
+			<generator class="native" />
+		</id>
+		<property name="productName" column="PRODUCT_NAME" type="string" />
+		<property name="productBenefits" column="PRODUCT_BENEFITS" type="string" />
+		<property name="productValidity" column="PRODUCT_VALIDITY" type="int" />
+		<property name="productGroup" column="PRODUCT_GROUP" type="int" />
+		<property name="productUnitRate" column="PRODUCT_UNIT_RATE" />
+	</class>
+</hibernate-mapping>
+

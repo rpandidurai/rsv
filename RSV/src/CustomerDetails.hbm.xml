@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+	<class name="sathish.app.model.CustomerDetails" table="CUSTOMER_DETAILS">
+		<meta attribute="class-description">
+			This class contains the Product details.
+		</meta>
+		<id name="customerId" type="int" column="CUSTOMER_ID">
+			<generator class="native" />
+		</id>
+		<property name="customerName" column="CUSTOMER_NAME" type="string" />
+		<property name="customerArea" column="CUSTOMER_AREA" />
+		<property name="customerAddress" column="CUSTOMER_ADDRESS" />
+		<property name="customerPhoneNo" column="CUSTOMER_PHONE_NO" />
+	</class>
+</hibernate-mapping>

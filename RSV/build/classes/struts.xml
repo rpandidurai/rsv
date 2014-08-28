@@ -1,0 +1,208 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+	"http://struts.apache.org/dtds/struts-2.3.dtd">
+
+<struts>
+
+	<constant name="struts.enable.DynamicMethodInvocation" value="false" />
+	<constant name="struts.devMode" value="true" />
+
+	<package name="default" namespace="/" extends="struts-default">
+
+		<interceptors>
+			<interceptor name="authentication" class="sathish.app.interceptors.AuthenticationInterceptor"></interceptor>
+			<interceptor-stack name="authStack">
+				<interceptor-ref name="authentication"></interceptor-ref>
+				<interceptor-ref name="defaultStack"></interceptor-ref>
+			</interceptor-stack>
+		</interceptors>
+
+		<default-interceptor-ref name="authStack"></default-interceptor-ref>
+
+		<!-- <default-action-ref name="index" /> -->
+
+		<global-results>
+			<result name="login" type="redirectAction">index</result>
+			<result name="FAIL" type="redirectAction">index</result>
+			<result name="error" type="redirectAction">index</result>
+
+			<result name="stream" type="stream">
+				<param name="contentType">text/html</param>
+				<param name="inputName">responseMsg</param>
+			</result>
+		</global-results>
+
+		<global-exception-mappings>
+			<exception-mapping exception="java.lang.Exception" result="error" />
+		</global-exception-mappings>
+
+		<action name="index">
+			<interceptor-ref name="defaultStack"></interceptor-ref>
+			<result>/index.jsp</result>
+		</action>
+
+		<action name="loginAction" method="login" class="sathish.app.action.LoginAction">
+			<interceptor-ref name="defaultStack"></interceptor-ref>
+			<result name="SUCCESS">/home.jsp</result>
+		</action>
+
+
+		<action name="logout" method="logout" class="sathish.app.action.LoginAction">
+			<interceptor-ref name="defaultStack"></interceptor-ref>
+			<result name="SUCCESS" type="redirectAction">index</result>
+		</action>
+
+		<action name="product" method="product" class="sathish.app.action.UserAction">
+			<result name="SUCCESS">/product.jsp</result>
+		</action>
+		<action name="productList" method="productList" class="sathish.app.action.UserAction">
+			<result name="SUCCESS">/productList.jsp</result>
+		</action>
+		<action name="productRegister" method="productRegister" class="sathish.app.action.UserAction">
+			<result name="SUCCESS">/productRegister.jsp</result>
+		</action>
+		<action name="addProduct" method="addProduct" class="sathish.app.action.UserAction">
+			<result name="SUCCESS">/productRegister.jsp</result>
+		</action>
+		<action name="deleteProduct" method="deleteProduct" class="sathish.app.action.UserAction">
+			<result name="SUCCESS" type="redirectAction">product</result>
+		</action>
+
+
+		<action name="customer" method="customer" class="sathish.app.action.UserAction">
+			<result name="SUCCESS">/customer.jsp</result>
+		</action>
+		<action name="customerList" method="customerList" class="sathish.app.action.UserAction">
+			<result name="SUCCESS">/customerList.jsp</result>
+		</action>
+		<action name="customerRegister" method="customerRegister" class="sathish.app.action.UserAction">
+			<result name="SUCCESS">/customerRegister.jsp</result>
+		</action>
+		<action name="addCustomer" method="addCustomer" class="sathish.app.action.UserAction">
+			<result name="SUCCESS">/customerRegister.jsp</result>
+		</action>
+		<action name="deleteCustomer" method="deleteCustomer" class="sathish.app.action.UserAction">
+			<result name="SUCCESS" type="redirectAction">customer</result>
+		</action>
+
+		<action name="sales" method="sales" class="sathish.app.action.UserAction">
+			<result name="SUCCESS">/sales.jsp</result>
+		</action>
+		<action name="salesBook" method="salesBook" class="sathish.app.action.UserAction">
+			<result name="SUCCESS">/salesDetails.jsp</result>
+		</action>
+		<action name="salesRegister" method="salesRegister" class="sathish.app.action.UserAction">
+			<result name="SUCCESS">/addSalesDetails.jsp</result>
+		</action>
+		<action name="addSales" method="addSalesDetails" class="sathish.app.action.UserAction">
+			<result name="SUCCESS">/addSalesDetails.jsp</result>
+		</action>
+		<action name="deleteSalesEntry" method="deleteSalesEntry" class="sathish.app.action.UserAction">
+			<result name="SUCCESS" type="redirectAction">purchase</result>
+		</action>
+		<action name="deleteSalesDetail" method="deleteSalesDetails" class="sathish.app.action.UserAction">
+			<result name="SUCCESS" type="redirectAction">purchase</result>
+		</action>
+
+		<action name="getProductFareStock" method="getProductFareStock" class="sathish.app.action.UserAction">
+		</action>
+
+
+
+		<action name="purchase" method="purchaseEntry" class="sathish.app.action.UserAction">
+			<result name="SUCCESS">/purchase.jsp</result>
+		</action>
+		<action name="purchaseDetails" method="purchaseDetails" class="sathish.app.action.UserAction">
+			<result name="SUCCESS">/purchaseDetails.jsp</result>
+		</action>
+		<action name="purchaseRegister" method="purchaseRegister" class="sathish.app.action.UserAction">
+			<result name="SUCCESS">/addPurchaseDetails.jsp</result>
+		</action>
+		<action name="addPurchase" method="addPurchaseEntry" class="sathish.app.action.UserAction">
+			<result name="SUCCESS">/addPurchaseDetails.jsp</result>
+		</action>
+
+		<action name="deletePurchase" method="deletePurchaseEntry" class="sathish.app.action.UserAction">
+			<result name="SUCCESS" type="redirectAction">purchase</result>
+		</action>
+		<action name="deletePurchaseDetail" method="deletePurchaseDetails" class="sathish.app.action.UserAction">
+			<result name="SUCCESS" type="redirectAction">purchase</result>
+		</action>
+
+		<action name="recharge" method="rechargeDetails" class="sathish.app.action.UserAction">
+			<result name="SUCCESS">/rechargeDetails.jsp</result>
+		</action>
+		<action name="rechargeRegister" method="rechargeRegister" class="sathish.app.action.UserAction">
+			<result name="SUCCESS">/addRechargeDetails.jsp</result>
+		</action>
+		<action name="addRecharge" method="addRechargeDetails" class="sathish.app.action.UserAction">
+			<result name="SUCCESS">/addRechargeDetails.jsp</result>
+		</action>
+
+
+		<!-- settings action part -->
+
+		<action name="settings" method="settings" class="sathish.app.action.SettingAction">
+			<result name="SUCCESS">/settings.jsp</result>
+		</action>
+
+		<action name="userDetails" method="userDetails" class="sathish.app.action.SettingAction">
+			<result name="SUCCESS">/addUser.jsp</result>
+		</action>
+		<action name="group" method="group" class="sathish.app.action.SettingAction">
+			<result name="SUCCESS">/addGroup.jsp</result>
+		</action>
+		<action name="deliveryBoys" method="deliveryBoys" class="sathish.app.action.SettingAction">
+			<result name="SUCCESS">/addDeliveryBoys.jsp</result>
+		</action>
+		<action name="company" method="company" class="sathish.app.action.SettingAction">
+			<result name="SUCCESS">/addCompany.jsp</result>
+		</action>
+
+		<action name="loadGroup" method="loadGroup" class="sathish.app.action.SettingAction">
+			<result name="SUCCESS">/loadProductGroup.jsp</result>
+		</action>
+		<action name="loadUser" method="loadUser" class="sathish.app.action.SettingAction">
+			<result name="SUCCESS">/loadUsers.jsp</result>
+		</action>
+		<action name="loadDeliveryBoys" method="loadDeliveryBoys" class="sathish.app.action.SettingAction">
+			<result name="SUCCESS">/loadDeliveryBoys.jsp</result>
+		</action>
+		<action name="loadCompany" method="loadCompany" class="sathish.app.action.SettingAction">
+			<result name="SUCCESS">/loadCompany.jsp</result>
+		</action>
+
+		<action name="addGroup" method="addGroup" class="sathish.app.action.SettingAction">
+			<result name="SUCCESS">/settings.jsp</result>
+		</action>
+		<action name="addUser" method="addUser" class="sathish.app.action.SettingAction">
+			<result name="SUCCESS">/settings.jsp</result>
+		</action>
+		<action name="addDeliveryBoys" method="addDeliveryBoys" class="sathish.app.action.SettingAction">
+			<result name="SUCCESS">/settings.jsp</result>
+		</action>
+		<action name="addCompany" method="addCompany" class="sathish.app.action.SettingAction">
+			<result name="SUCCESS">/settings.jsp</result>
+		</action>
+
+		<action name="deleteGroup" method="deleteGroup" class="sathish.app.action.SettingAction">
+			<result name="SUCCESS">/settings.jsp</result>
+		</action>
+		<action name="deleteUser" method="deleteUser" class="sathish.app.action.SettingAction">
+			<result name="SUCCESS">/settings.jsp</result>
+		</action>
+		<action name="deleteDeliveryBoys" method="deleteDeliveryBoys" class="sathish.app.action.SettingAction">
+			<result name="SUCCESS">/settings.jsp</result>
+		</action>
+		<action name="deleteCompany" method="deleteCompany" class="sathish.app.action.SettingAction">
+			<result name="SUCCESS">/settings.jsp</result>
+		</action>
+
+	</package>
+
+	<include file="example.xml" />
+
+	<!-- Add packages here -->
+
+</struts>

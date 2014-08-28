@@ -1,0 +1,61 @@
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
+<%@ taglib prefix="s" uri="/struts-tags"%>
+<%@ taglib uri="/struts-jquery-tags" prefix="sj"%>
+<!DOCTYPE html>
+<script>
+	function loadPurchaseDetails() {
+		$('#filterDateSubmit').click();
+	}
+</script>
+<s:include value="header.jsp" />
+<s:include value="tabMenu.jsp" />
+<!-- content area -->
+<div class="innercontainer">
+	<div class="contentarea">
+		<div class="pageheading">
+			<h2>Recharge</h2>
+		</div>
+		<!-- Right side table & Form -->
+		<div id="contentDiv">
+			<div class="rightsidecont right">
+				<div class="create">
+					<s:a href="#" onclick="addPurchase()" cssClass="button button-style2 button-mini butcurve-sml">Enter Purchase Details</s:a>
+				</div>
+				<div class="breadcrumb left">
+					<a href="loginAction.action">Home</a>- Recharge
+				</div>
+				<div class="clear pageheadDiv">
+					<div class="pagehead">
+						<h2>Recharge</h2>
+					</div>
+				</div>
+				<div id="formMessage" class="formMessage">
+					<span class="success fa-remove-sign" id="successMsg" style="display: none;"></span> <span class="failed fa-remove-sign" id="errorMsg" style="display: none;"></span>
+				</div>
+				<div class="filterDiv">
+					<s:form id="filterDateForm" action="purchaseDetails" method="POST" theme="simple">                  
+                    Filter by date : &nbsp;
+                    <sj:datepicker showOn="focus" cssClass="ps_filter_1" id="fromFilterDate" value="today" name="fromFilterDate" onchange="loadPurchaseDetails();" />
+                     - 
+                    <sj:datepicker showOn="focus" cssClass="ps_filter_1" id="toFilterDate" value="today" name="toFilterDate" onchange="loadPurchaseDetails();" />
+						<sj:submit formIds="filterDateForm" id="filterDateSubmit" targets="detailsDiv" cssStyle="display:none;"></sj:submit>
+					</s:form>
+				</div>
+				<div id="detailsDiv"></div>
+			</div>
+		</div>
+	</div>
+	<s:hidden id="global" value="purchase" />
+	<s:hidden id="deleteId" />
+</div>
+<sj:dialog id="deleteConfirm" position="[430,230]" width="400" height="140" buttons="{ 'Ok':function (){deleteOk();}, 'No':function (){deleteNo();} }" title="Delete Confirmation" autoOpen="false"
+	modal="true">Are You sure want to delete this Purchase Entry</sj:dialog>
+<sj:submit formIds="PurchaseDetailsForm" id="purchaseDetailsFormSubmit" cssStyle="display:none;" targets="contentDiv" />
+<%-- <s:debug></s:debug> --%>
+<!-- content area -->
+<script>
+	$(document).ready(function() {
+		loadPurchaseDetails();
+	});
+</script>
+<s:include value="footer.jsp" />

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Context docBase="dbcp" path="/RSV">
+	<Resource 
+	name="jdbc/theapp" 
+	auth="Container" 
+	driverClassName="com.mysql.jdbc.Driver" 
+	logAbandoned="true"
+	maxActive="256" 
+	maxIdle="5"
+	maxWait="10000" 	 
+    username="root" 
+	password="veradis" 
+	removeAbandoned="true"
+    removeAbandonedTimeout="60" 
+    type="javax.sql.DataSource" 
+    url="jdbc:mysql://172.16.12.36:3306/theapp?autoReconnect=true"
+    validationQuery="SELECT 1" 
+    />
+</Context>

@@ -1,0 +1,126 @@
+﻿/* Define the body style */
+
+/* We remove the margin, padding, and list style of UL and LI components */
+#menuwrapper ul, #menuwrapper ul li{
+    margin:0;
+    padding:0;
+    list-style:none;
+}
+
+/* We apply background color and border bottom white and width to 150px */
+#menuwrapper ul li{
+	color:#4a5058;
+	cursor:pointer;
+}
+#menuwrapper ul li div{
+	width:30px;
+	line-height:40px;
+	font-size:20px;
+	float:left;
+	border:0px solid #f00;
+}
+/* We apply the background hover color when user hover the mouse over of the li component */
+/* for IE < 9 we using class .iehover */
+#menuwrapper ul li:hover,
+#menuwrapper ul li.iehover{
+   background-color:#e6e5e4;
+	cursor:pointer;
+	color:#ce6a00;	
+    position:relative;
+}
+
+/* We apply the link style */
+#menuwrapper ul li a{
+   color:#4a5058;
+    display:inline-block;
+    text-decoration:none;
+	padding:11px 0;
+	text-indent:0px;
+	color:#4a5058;
+	font-size:15px;
+}
+
+/**** SECOND LEVEL MENU ****/
+/* We make the position to absolute for flyout menu and hidden the ul until the user hover the parent li item */
+#menuwrapper ul li ul{
+    position:absolute;
+    display:none;
+}
+
+/* When user has hovered the li item, we show the ul list by applying display:block, note: 150px is the individual menu width.  */
+/* for IE < 9 we using class .iehover */
+#menuwrapper ul li:hover ul, 
+#menuwrapper ul li.iehover ul{
+    left:100%;
+    top:0px;
+    display:block;
+}
+
+/* we apply different background color to 2nd level menu items*/
+#menuwrapper ul li ul li{
+    background-color:#e6e5e4;
+	width:200px;
+}
+
+/* We change the background color for the level 2 submenu when hovering the menu */
+/* for IE < 9 we using class .iehover */
+#menuwrapper ul li:hover ul li:hover,
+#menuwrapper ul li.iehover ul li.iehover{
+   background-color:#4a5058;
+	cursor:pointer;
+	border-radius:0;
+}
+
+/* We style the color of level 2 links */
+#menuwrapper ul li ul li a{
+    color:#454444;
+    display:inline-block;
+    width:190px;
+}
+#menuwrapper ul li ul li a:hover{
+	color:#fff;
+}
+
+/**** THIRD LEVEL MENU ****/
+/* We need to hide the 3rd menu, when hovering the first level menu */
+/* for IE < 9 we using class .iehover */
+#menuwrapper ul li:hover ul li ul,
+#menuwrapper ul li.iehover ul li ul{
+    position:absolute;
+    display:none;
+}
+
+/* We show the third level menu only when they hover the second level menu parent */
+/* for IE < 9 we using class .iehover */
+#menuwrapper ul li:hover ul li:hover ul,
+#menuwrapper ul li.iehover ul li.iehover ul{
+    display:block;
+    left:150px;
+    top:0;
+}
+
+/* We change the background color for the level 3 submenu*/
+/* for IE < 9 we using class .iehover */
+#menuwrapper ul li:hover ul li:hover ul li,
+#menuwrapper ul li.iehover ul li.iehover ul li{
+    background:#86d3fa;
+}
+
+/* We change the background color for the level 3 submenu when hovering the menu */
+/* for IE < 9 we using class .iehover */
+#menuwrapper ul li:hover ul li:hover ul li:hover,
+#menuwrapper ul li.iehover ul li.iehover ul li.iehover{
+    background:#358ebc;
+}
+
+/* We change the level 3 link color */
+/* for IE < 9 we using class .iehover */
+#menuwrapper ul li:hover ul li:hover ul li a,
+#menuwrapper ul li.iehover ul li.iehover ul li a{
+    color:#ffffff;
+}
+
+/* Clear float */
+.clear{
+    clear:both;
+}

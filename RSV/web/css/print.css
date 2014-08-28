@@ -1,0 +1,6 @@
+@CHARSET "UTF-8";
+
+.pageheading,.create,.breadcrumb,.pageheadDiv,.formMessage,.filterDiv,.print
+	{
+	display: none !important;
+}
