@@ -230,13 +230,14 @@ body {
 }
 
 .loginbox .txtboximg {
-	background-color: #fff;
+	background-color: transparent;
 	width: 43px;
 	height: 41px;
 	position: absolute;
 	margin: 2px 0 0 2px;
 	border-top-left-radius: 5px;
 	border-bottom-left-radius: 5px;
+	padding-top: 3px;
 }
 
 .loginbox .txtboximg img {
@@ -955,7 +956,7 @@ ul .actionMessage li,ul .actionError li {
 	position: relative;
 	bottom: 0;
 	width: 100%;
-	z-index: 100;
+/* 	z-index: 100; */
 }
 
 .breadcrumb.left a {

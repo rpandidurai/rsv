@@ -37,7 +37,7 @@
 			return false;
 		}
 		$('#errorMsg').hide('slow');
-		var quantityValue = toValue - fromValue;
+		var quantityValue = (toValue - fromValue) + 1;
 
 		$(quantityElementId).attr('value', quantityValue);
 	}
@@ -68,7 +68,8 @@
 				if (!isNaN(amount))
 					totalAmount += parseFloat(amount);
 			}
-			$('#totalAmount').val(totalAmount);
+			$('#totalAmount').text(totalAmount);
+			$('#totalAmount_hdn').val(totalAmount);
 		} else if (2 === flag) { // flag 1 for quantity
 			var totalQuantity = 0;
 			for (var i = 0; i <= rowCount; i++) {
@@ -76,7 +77,8 @@
 				if (!isNaN(quantity))
 					totalQuantity += parseInt($('#quantity_' + i).val());
 			}
-			$('#totalQuantity').val(totalQuantity);
+// 			$('#totalQuantity').text(totalQuantity);
+			$('#totalQuantity_hdn').val(totalQuantity);
 		}
 	}
 
@@ -234,22 +236,38 @@
 													</s:iterator>
 
 												</table>
-												<table id="salesTotalTble">
-													<tr>
-														<td colspan="2" width="55%"><a onclick="addRow();" class="btn b-green"> <span class="fa-plus"></span></a> &nbsp; <a class="btn b-red" onclick="delRow();"> <span
-																class="fa-minus"></span></a> <span style="padding-left: 70%;">Total</span></td>
-														<td width="15%"><s:textfield theme="simple" size="20" cssClass="ps_text_1" id="totalQuantity" readonly="true" name="purchaseEntry.totalQuantity" value="%{totalQuantity}" /></td>
-														<td width="15%">&nbsp;</td>
-														<td width="15%"><s:textfield theme="simple" size="20" cssClass="ps_text_1" id="totalAmount" readonly="true" name="purchaseEntry.totalAmount" value="%{totalAmount}" /></td>
-													</tr>
-												</table>
+												<br> <br>
+												<div id="totalDiv">
+													<div>
+														<a onclick="addRow();" class="btn b-green"> <span class="fa-plus"></span></a> &nbsp; <a class="btn b-red" onclick="delRow();"> <span class="fa-minus"></span></a> <span
+															style="padding-left: 60%;">Total Purchase Amount</span>
+													</div>
+													<div class="totalFont">
+														<span id="totalAmount"> <s:property value="%{totalAmount}" />
+														</span> <span>Rs</span>
+													</div>
+													<!-- 													 <div></div> -->
+													<s:hidden theme="simple" id="totalQuantity_hdn" readonly="true" name="purchaseEntry.totalQuantity" value="%{totalQuantity}" />
+													<s:hidden theme="simple" id="totalAmount_hdn" readonly="true" name="purchaseEntry.totalAmount" value="%{totalAmount}" />
+												</div>
+												<!-- 												<table > -->
+												<!-- 													<tr> -->
+												<%-- 														<td colspan="2" width="54%"><a onclick="addRow();" class="btn b-green"> <span class="fa-plus"></span></a> &nbsp; <a class="btn b-red" onclick="delRow();"> <span class="fa-minus"></span></a> --%>
+												<%-- 															<span style="padding-left: 70%;">Total</span></td> --%>
+												<%-- 												<td width="13%"><span id="totalQuantity"><s:property value="purchaseEntry.totalQuantity" /> </span> <s:hidden theme="simple" id="totalQuantity_hdn" readonly="true"<%-- 																name="purchaseEntry.totalQuantity" value="%{totalQuantity}" /></td> --%>
+												<%-- 														<td width="13%">&nbsp;</td> --%>
+												<%-- 														<td width="13%"><span id="totalAmount"><s:property value="purchaseEntry.totalAmount" /> </span> <s:hidden theme="simple" id="totalAmount_hdn" readonly="true" --%>
+												<%-- 																name="purchaseEntry.totalAmount" value="%{totalAmount}" /></td> --%>
 
+												<!-- 													</tr> -->
+												<!-- 												</table> -->
 												<div class="formdata">
 													<div class="top-bottom" align="right" style="padding-right: 25px;">
 														<s:reset cssClass="button-style1 button-small1 butcurve-sml" theme="simple" value="Cancel" label="Cancel" />
 														<input type="button" class="button-style2 button-small1 butcurve-sml submit" value="Submit" onclick="registerPurchaseDetails();" />
 													</div>
 												</div>
+
 											</div>
 										</div>
 									</s:form> <input type="hidden" id="rowCount" name="rowCount" value='<s:property value="#rowCount"/>'></td>
@@ -268,4 +286,7 @@
 <!-- targets="contentDiv" -->
 <%-- <s:debug></s:debug> --%>
 <!-- content area -->
+<script>
+	$('#invoiceNo').prop('autocomplete', 'off');
+</script>
 <s:include value="footer.jsp" />

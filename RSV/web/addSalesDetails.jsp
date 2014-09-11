@@ -192,7 +192,7 @@ function eventKeyDown(event) {
 				+ '" name="salesEntry.salesDetailsList['
 				+ rowCount
 				+ '].quantity" value="0" /></td>'
-				+ '<td><s:textfield theme="simple" size="20" cssClass="ps_text_1" name="salesEntry.salesDetailsList['+rowCount+'].unitRate" id="unitRate_'+rowCount+'" value="0" readonly="true" /></td>'
+				+ '<td><s:textfield theme="simple" size="20" cssClass="ps_text_1" name="salesEntry.salesDetailsList['+rowCount+'].unitRate" id="unitRate_'+rowCount+'" value="0" readonly="false" /></td>'
 				+ '<td><s:textfield theme="simple" size="20" cssClass="ps_text_1" id="amount_'
 				+ rowCount
 				+ '" onblur="calculateTotal(1)" name="salesEntry.salesDetailsList['
@@ -317,7 +317,7 @@ function eventKeyDown(event) {
 															<td><s:textfield theme="simple" size="10" cssClass="ps_text_1 digits" onblur="calculateSales(%{#stats.index});" id="quantity_%{#stats.index}"
 																	name="salesEntry.salesDetailsList[%{#stats.index}].quantity" value="%{quantity}" /></td>
 															<td><s:textfield theme="simple" size="10" cssClass="ps_text_1" name="salesEntry.salesDetailsList[%{#stats.index}].unitRate" id="unitRate_%{#stats.index}" value="%{unitRate}"
-																	readonly="true" /></td>
+																	readonly="false" /></td>
 															<td><s:textfield theme="simple" size="20" cssClass="ps_text_1" onblur="calculateTotal(1);" id="amount_%{#stats.index}" name="salesEntry.salesDetailsList[%{#stats.index}].amount"
 																	readonly="true" value="%{amount}" /></td>
 															<%-- 													<td><s:a> --%>

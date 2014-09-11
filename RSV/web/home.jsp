@@ -16,7 +16,7 @@
 		<%-- 			<s:include value="leftNavigateMenu.jsp" /> --%>
 		<!-- 		</div> -->
 		<!-- Left navigation -->
-
+ 
 		<!-- Right side table & Form -->
 		<s:url action="registration" var="create" />
 		<div class="rightsidecont right">

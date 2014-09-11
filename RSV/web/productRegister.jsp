@@ -39,25 +39,24 @@
 
 	function eventKeyDown(event) {
 		var num = event.keyCode;
-// 		if ((num >= 65 && num <= 90) || (num != 190 && num >= 186) && num != 32) {
-// 			$("#errorMsg").html("Digits Only").show().fadeOut("slow");
-// 			event.preventDefault();
-// 		}
+		// 		if ((num >= 65 && num <= 90) || (num != 190 && num >= 186) && num != 32) {
+		// 			$("#errorMsg").html("Digits Only").show().fadeOut("slow");
+		// 			event.preventDefault();
+		// 		}
 
-				if ((num > 95 && num < 106) || (num > 36 && num < 41) || num == 9
-						|| num == 116) {
-					return;
-				}
-				if (event.shiftKey || event.ctrlKey || event.altKey) {
-					$("#errorMsg").html("Digits Only").show().fadeOut("slow");
-					event.preventDefault();
-				} else if (num != 46 && num != 8 && num != 110 && num != 190) {
-					if (isNaN(parseInt(String.fromCharCode(event.which)))) {
-						$("#errorMsg").html("Digits Only").show().fadeOut("slow");
-						event.preventDefault();
-					}
-				}
-
+		if ((num > 95 && num < 106) || (num > 36 && num < 41) || num == 9
+				|| num == 116) {
+			return;
+		}
+		if (event.shiftKey || event.ctrlKey || event.altKey) {
+			$("#errorMsg").html("Digits Only").show().fadeOut("slow");
+			event.preventDefault();
+		} else if (num != 46 && num != 8 && num != 110 && num != 190) {
+			if (isNaN(parseInt(String.fromCharCode(event.which)))) {
+				$("#errorMsg").html("Digits Only").show().fadeOut("slow");
+				event.preventDefault();
+			}
+		}
 	}
 </script>
 <!-- content area -->

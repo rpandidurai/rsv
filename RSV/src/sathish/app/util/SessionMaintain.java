@@ -19,7 +19,7 @@ public class SessionMaintain {
 	
 
 	public void validateSession() {
-
+		logger.info("SessionMaintain : validateSession");
 		try{
 			
 		} catch (Exception e){

@@ -334,3 +334,24 @@ span .btn {
 .pointer {
 	cursor: pointer;
 }
+
+#totalDiv {
+	padding: 5px 0 5px 0;
+	display:table;
+	width: 100%;
+}
+#totalDiv div{
+	display: table-cell;
+}
+#totalDiv span .btn {
+	padding: 2px;
+	width: 30px;
+	line-height: 30px;
+}
+
+.totalFont {
+	text-align: right;
+	width: 20%;
+	font-weight: bold;
+	font-size: 2em;
+}

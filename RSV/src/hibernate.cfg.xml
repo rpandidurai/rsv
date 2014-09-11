@@ -59,6 +59,9 @@
 		<mapping class="sathish.app.dto.SalesEntry" />
 		<mapping class="sathish.app.dto.SalesDetails" />
 		<mapping class="sathish.app.dto.Recharge" />
+		
+		<mapping class="sathish.app.dto.EasyMobileNo" />
+        <mapping class="sathish.app.dto.EasyRecharge" />
 
 		<mapping class="sathish.app.dto.Stock" />
 	</session-factory>
