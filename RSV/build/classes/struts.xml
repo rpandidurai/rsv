@@ -131,8 +131,13 @@
 		</action>
 
 		<action name="recharge" method="rechargeDetails" class="sathish.app.action.UserAction">
-			<result name="SUCCESS">/rechargeDetails.jsp</result>
+			<result name="SUCCESS">/recharge.jsp</result>
 		</action>
+		<action name="easyRechargeDetails" method="easyRechargeDetails" class="sathish.app.action.UserAction">
+			<result name="SUCCESS">/easyRechargeDetails.jsp</result>
+			<result name="loadCash">/loadCash.jsp</result>
+		</action>
+
 		<action name="rechargeRegister" method="rechargeRegister" class="sathish.app.action.UserAction">
 			<result name="SUCCESS">/addRechargeDetails.jsp</result>
 		</action>

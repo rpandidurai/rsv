@@ -2,9 +2,40 @@
 <%@ taglib prefix="s" uri="/struts-tags"%>
 <%@ taglib uri="/struts-jquery-tags" prefix="sj"%>
 <!DOCTYPE html>
+<head>
+<link rel="stylesheet" href="css/easyList.css" type="text/css" />
+</head>
 <script>
-	function loadPurchaseDetails() {
-		$('#filterDateSubmit').click();
+	function loadEasyRechargeDetails() {
+		$.ajax({
+			url : "easyRechargeDetails.action",
+			dataType : "html",
+			type : "POST",
+			async : true,
+			success : function(res) {
+				$('#detailsDiv').html('');
+				$('#detailsDiv').html(res);
+			}
+		});
+	}
+	function ajaxCall(url) {
+		$.ajax({
+			url : url,
+			dataType : 'text',
+			type : 'POST',
+			async : true,
+			success : function(res) {
+				$('#popDiv').html('');
+				$('#popDiv').html(res);
+				$('#fade').show('slow');
+				$('#light').show('slow');
+			}
+		});
+	}
+	function closePop() {
+		$('#fade').hide('slow');
+		$('#light').hide('slow');
+		$('#popDiv').html('');
 	}
 </script>
 <s:include value="header.jsp" />
@@ -13,7 +44,7 @@
 <div class="innercontainer">
 	<div class="contentarea">
 		<div class="pageheading">
-			<h2>Recharge</h2>
+			<h2>Easy Recharge</h2>
 		</div>
 		<!-- Right side table & Form -->
 		<div id="contentDiv">
@@ -22,26 +53,18 @@
 					<s:a href="#" onclick="addPurchase()" cssClass="button button-style2 button-mini butcurve-sml">Enter Purchase Details</s:a>
 				</div>
 				<div class="breadcrumb left">
-					<a href="loginAction.action">Home</a>- Recharge
+					<a href="loginAction.action">Home</a>-Easy Recharge
 				</div>
 				<div class="clear pageheadDiv">
 					<div class="pagehead">
-						<h2>Recharge</h2>
+						<h2>Easy Recharge</h2>
 					</div>
 				</div>
 				<div id="formMessage" class="formMessage">
 					<span class="success fa-remove-sign" id="successMsg" style="display: none;"></span> <span class="failed fa-remove-sign" id="errorMsg" style="display: none;"></span>
 				</div>
-				<div class="filterDiv">
-					<s:form id="filterDateForm" action="purchaseDetails" method="POST" theme="simple">                  
-                    Filter by date : &nbsp;
-                    <sj:datepicker showOn="focus" cssClass="ps_filter_1" id="fromFilterDate" value="today" name="fromFilterDate" onchange="loadPurchaseDetails();" />
-                     - 
-                    <sj:datepicker showOn="focus" cssClass="ps_filter_1" id="toFilterDate" value="today" name="toFilterDate" onchange="loadPurchaseDetails();" />
-						<sj:submit formIds="filterDateForm" id="filterDateSubmit" targets="detailsDiv" cssStyle="display:none;"></sj:submit>
-					</s:form>
-				</div>
 				<div id="detailsDiv"></div>
+				<!-- 				<div class="content-container no-print"></div> -->
 			</div>
 		</div>
 	</div>
@@ -55,7 +78,10 @@
 <!-- content area -->
 <script>
 	$(document).ready(function() {
-		loadPurchaseDetails();
+		loadEasyRechargeDetails();
 	});
 </script>
+<div id="light" class="rightsidecont right white_content popDiv ">
+	<div id="popDiv" class="clear tabledata"></div>
+</div>
 <s:include value="footer.jsp" />

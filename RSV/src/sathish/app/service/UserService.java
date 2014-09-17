@@ -52,6 +52,8 @@ public interface UserService {
 	public List getAllRecords(Class entity);
 
 	public Object getById(Class<?> entity, long id);
+	
+	public Object getLastRecord(Class<?> entity, String property);
 
 	public String getPropertyValue(Class<?> entity, String property, String propertyId, Object id);
 

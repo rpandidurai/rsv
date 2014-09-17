@@ -6,6 +6,7 @@ package sathish.app.action;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -15,6 +16,9 @@ import org.apache.struts2.interceptor.SessionAware;
 import sathish.app.dto.Company;
 import sathish.app.dto.CustomerDetails;
 import sathish.app.dto.DeliveryBoys;
+import sathish.app.dto.EasyMobileNo;
+import sathish.app.dto.EasyRecharge;
+import sathish.app.dto.EasyRechargeBalance;
 import sathish.app.dto.ProductDetails;
 import sathish.app.dto.ProductGroup;
 import sathish.app.dto.PurchaseDetails;
@@ -83,14 +87,15 @@ public class UserAction extends ActionSupport implements SessionAware, Preparabl
 	public String addProduct() {
 		logger.info("in addProduct");
 
-		UserService userService = new UserServiceManager(session);
 		if (this.filterId != 0) {
 			this.productList = userService.getProductList((int) filterId, 0);
 		} else {
-			this.productList.add(new ProductDetails());
+			ProductDetails product = new ProductDetails();
+			product.setStock(new Stock());
+			this.productList.add(product);
 		}
 		this.productGroupList = userService.getAllRecords(ProductGroup.class);
-
+		System.out.println(" this.productList   " + this.productList);
 		return "SUCCESS";
 	}
 
@@ -103,6 +108,7 @@ public class UserAction extends ActionSupport implements SessionAware, Preparabl
 		if (this.product.getProductId() > 0) {
 			message = "Product Updated Successfully";
 		}
+
 		status = userService.addProduct(this.product);
 
 		this.productGroupList = userService.getAllRecords(ProductGroup.class);
@@ -330,6 +336,7 @@ public class UserAction extends ActionSupport implements SessionAware, Preparabl
 	public String purchaseRegister() {
 		logger.info("action : adding purchase Entry");
 		boolean status = false;
+		PurchaseEntry lastPurchase;
 		String message = "Purchase Entry Added Successfully";
 
 		if (this.purchaseEntry.getPurchaseId() > 0) {
@@ -337,6 +344,10 @@ public class UserAction extends ActionSupport implements SessionAware, Preparabl
 		}
 
 		status = userService.saveOrUpdateEntity(this.purchaseEntry);
+
+		if (status) {
+			lastPurchase = (PurchaseEntry) userService.getLastRecord(PurchaseEntry.class, "purchaseId");
+		}
 
 		this.productList = userService.getProductList(0, 0);
 		this.companyList = userService.getCompanyList();
@@ -351,6 +362,25 @@ public class UserAction extends ActionSupport implements SessionAware, Preparabl
 			return "FAIL";
 		}
 
+	}
+
+	public Object updateStock(List<PurchaseDetails> list) {
+		logger.info("action : updateStock");
+		Stock stock;
+		try {
+
+			for (PurchaseDetails purchaseDetails : list) {
+				stock = new Stock();
+				// stock.setProductId(purchaseDetails.getProductId());
+				stock.setInStock(purchaseDetails.getPurchseQuantity());
+				stock.setLastTxnDate(new Date());
+
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
 	}
 
 	public String deletePurchaseEntry() {
@@ -480,7 +510,7 @@ public class UserAction extends ActionSupport implements SessionAware, Preparabl
 		logger.info("UserAction : getProductStock");
 		String value = "";
 		try {
-			value = userService.getPropertyValue(ProductDetails.class, "productUnitRate", "productId", (int)filterId);
+			value = userService.getPropertyValue(ProductDetails.class, "productUnitRate", "productId", (int) filterId);
 			value = value + "," + userService.getPropertyValue(Stock.class, "inStock", "stockId", filterId);
 			System.out.println("value ------------------- " + value);
 		} catch (Exception e) {
@@ -488,6 +518,115 @@ public class UserAction extends ActionSupport implements SessionAware, Preparabl
 		}
 
 		responseMsg = utils.responseMessage(value);
+
+		return "stream";
+	}
+
+	/* Easy recharge methods */
+	public String easyRecharge() {
+		logger.info("UserAction : easyRecharge");
+		try {
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return "SUCCESS";
+	}
+
+	public String easyRechargeDetails() {
+		logger.info("UserAction : easyRechargeDetails");
+		String returnPage = "";
+		try {
+			if (this.filterId > 0) {
+				easyRechargeBalanceList = new ArrayList<EasyRechargeBalance>();
+				easyRechargeBalanceList.add(new EasyRechargeBalance());
+				returnPage = "loadCash";
+			} else {
+				easyRechargeBalanceList = userService.getAllRecords(EasyRechargeBalance.class);
+				returnPage = "SUCCESS";
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return returnPage;
+	}
+
+	public String addEasyMobileNo() {
+		logger.info("UserAction : addEasyMobileNo");
+		String message = "Mobile Number Added Successfully";
+		boolean status = false;
+		try {
+			status = userService.saveOrUpdateEntity(easyMobileNo);
+
+			if (this.easyMobileNo.getEasyMobileId() > 0) {
+				message = "Mobile Number Updated Successfully";
+			}
+
+			if (status) {
+				logger.info(message);
+				addActionMessage(message);
+				return "SUCCESS";
+			} else {
+				addActionError("Mobile Number adding failed");
+				return "FAIL";
+			}
+		} catch (Exception e) {
+			message = "Something went wrong while adding mobile no";
+			e.printStackTrace();
+		}
+
+		responseMsg = utils.responseMessage(message);
+
+		return "stream";
+	}
+
+	public String addEasyRecharge() {
+		logger.info("UserAction : addEasyMobileNo");
+		String message = "Load Cash Successfully";
+		boolean status = false;
+		try {
+			status = userService.saveOrUpdateEntity(easyRecharge);
+
+			if (this.easyRecharge.getEasyRechargeId() > 0) {
+				message = "Load Cash Updated Successfully";
+			}
+
+			if (status) {
+				logger.info(message);
+				addActionMessage(message);
+				return "SUCCESS";
+			} else {
+				addActionError("Load Cash adding failed");
+				return "FAIL";
+			}
+		} catch (Exception e) {
+			message = "Something went wrong while Load Cash";
+			e.printStackTrace();
+		}
+
+		responseMsg = utils.responseMessage(message);
+
+		return "stream";
+	}
+
+	public String deleteEasyMobileNo() {
+		logger.info("action delete Mobile No");
+		String message = "Deleting Mobile No Failed";
+		boolean isDeleted = false;
+
+		try {
+			isDeleted = userService.deleteEntityById(EasyMobileNo.class, this.filterId);
+
+			if (isDeleted) {
+				message = "Mobile No deleted successfully!";
+			}
+		} catch (Exception e) {
+			message = "Something went wrong while deleting Mobile No";
+			logger.error("error delete Mobile No");
+			e.printStackTrace();
+		}
+
+		responseMsg = utils.responseMessage(message);
 
 		return "stream";
 	}
@@ -548,6 +687,12 @@ public class UserAction extends ActionSupport implements SessionAware, Preparabl
 	private PurchaseDetails purchaseDetails;
 	private DeliveryBoys deliveryBoys;
 
+	private EasyMobileNo easyMobileNo;
+	private EasyRechargeBalance easyRechargeBalance;
+	private EasyRecharge easyRecharge;
+
+	private Stock stock;
+
 	private List<DeliveryBoys> deliveryBoysList = new ArrayList<DeliveryBoys>();
 
 	private List<ProductDetails> productList = new ArrayList<ProductDetails>();
@@ -561,6 +706,10 @@ public class UserAction extends ActionSupport implements SessionAware, Preparabl
 
 	private List<SalesEntry> salesEntryList = new ArrayList<SalesEntry>();
 	private List<PurchaseEntry> purchaseEntryList = new ArrayList<PurchaseEntry>();
+
+	private List<EasyMobileNo> easyMobileNoList = new ArrayList<EasyMobileNo>();
+	private List<EasyRechargeBalance> easyRechargeBalanceList = new ArrayList<EasyRechargeBalance>();
+	private List<EasyRecharge> easyRechargeList = new ArrayList<EasyRecharge>();
 
 	public List<Company> getCompanyList() {
 		return companyList;
@@ -719,6 +868,62 @@ public class UserAction extends ActionSupport implements SessionAware, Preparabl
 
 	public void setDeliveryBoysList(List<DeliveryBoys> deliveryBoysList) {
 		this.deliveryBoysList = deliveryBoysList;
+	}
+
+	public EasyMobileNo getEasyMobileNo() {
+		return easyMobileNo;
+	}
+
+	public void setEasyMobileNo(EasyMobileNo easyMobileNo) {
+		this.easyMobileNo = easyMobileNo;
+	}
+
+	public EasyRecharge getEasyRecharge() {
+		return easyRecharge;
+	}
+
+	public void setEasyRecharge(EasyRecharge easyRecharge) {
+		this.easyRecharge = easyRecharge;
+	}
+
+	public List<EasyMobileNo> getEasyMobileNoList() {
+		return easyMobileNoList;
+	}
+
+	public void setEasyMobileNoList(List<EasyMobileNo> easyMobileNoList) {
+		this.easyMobileNoList = easyMobileNoList;
+	}
+
+	public List<EasyRecharge> getEasyRechargeList() {
+		return easyRechargeList;
+	}
+
+	public void setEasyRechargeList(List<EasyRecharge> easyRechargeList) {
+		this.easyRechargeList = easyRechargeList;
+	}
+
+	public EasyRechargeBalance getEasyRechargeBalance() {
+		return easyRechargeBalance;
+	}
+
+	public void setEasyRechargeBalance(EasyRechargeBalance easyRechargeBalance) {
+		this.easyRechargeBalance = easyRechargeBalance;
+	}
+
+	public List<EasyRechargeBalance> getEasyRechargeBalanceList() {
+		return easyRechargeBalanceList;
+	}
+
+	public void setEasyRechargeBalanceList(List<EasyRechargeBalance> easyRechargeBalanceList) {
+		this.easyRechargeBalanceList = easyRechargeBalanceList;
+	}
+
+	public Stock getStock() {
+		return stock;
+	}
+
+	public void setStock(Stock stock) {
+		this.stock = stock;
 	}
 
 }

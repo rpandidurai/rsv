@@ -143,6 +143,8 @@
 														<label>Group</label>
 													</p>
 													<s:select label="Group" name="product.groupId" list="productGroupList" listKey="groupId" listValue="groupName" headerKey="0" id="productGroup" headerValue="Select" value="groupId" />
+													<s:hidden theme="simple" id="validity" name="product.stock.stockId" value="%{stock.stockId}" />
+													<s:hidden theme="simple" id="validity" name="product.stock.inStock" value="%{stock.inStock}" />
 
 												</div>
 												<div class="btn-row">

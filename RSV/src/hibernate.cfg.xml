@@ -61,6 +61,7 @@
 		<mapping class="sathish.app.dto.Recharge" />
 		
 		<mapping class="sathish.app.dto.EasyMobileNo" />
+		<mapping class="sathish.app.dto.EasyRechargeBalance" />
         <mapping class="sathish.app.dto.EasyRecharge" />
 
 		<mapping class="sathish.app.dto.Stock" />

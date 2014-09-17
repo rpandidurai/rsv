@@ -301,7 +301,7 @@ public class UserServiceManager implements UserService {
 			session = sessionFactory.openSession();
 			tx = session.beginTransaction();
 			session.saveOrUpdate(purchaseEntry);
-			tx.commit();			
+			tx.commit();
 		} catch (Exception e) {
 			// TODO: handle exception
 			status = -1;
@@ -558,6 +558,22 @@ public class UserServiceManager implements UserService {
 		return persistentInstance;
 	}
 
+	@Override
+	public Object getLastRecord(Class<?> entity, String property) {
+		// To get last record from the entity
+		Session session = null;
+		Object persistentInstance = null;
+		try {
+			session = sessionFactory.openSession();
+			Criteria criteria = session.createCriteria(entity).addOrder(Order.desc(property)).setMaxResults(1);
+			persistentInstance = criteria.uniqueResult();
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		}
+		return persistentInstance;
+	}
+
 	public String getPropertyValue(Class<?> entity, String property, String propertyId, Object id) {
 		String value = "";
 		Session session = null;
@@ -570,7 +586,7 @@ public class UserServiceManager implements UserService {
 			criteria.add(Restrictions.eq(propertyId, id)).addOrder(Order.desc(propertyId)).setMaxResults(1);
 
 			result = criteria.uniqueResult();
-			
+
 			if (result != null)
 				value = result + "";
 

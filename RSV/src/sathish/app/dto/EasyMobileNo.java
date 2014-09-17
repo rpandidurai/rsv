@@ -17,23 +17,29 @@ import javax.persistence.Table;
  * 
  */
 @Entity
-@Table(name="EASY_MOBILE_NO")
+@Table(name = "EASY_MOBILE_NO")
 public class EasyMobileNo {
 
 	public EasyMobileNo() {
 		// TODO Auto-generated constructor stub
 	}
 
-	@Id @GeneratedValue(strategy=GenerationType.AUTO) @Column(name="EASY_MOBILE_ID")
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	@Column(name = "EASY_MOBILE_ID")
 	private long easyMobileId;
-	@Column(name="EASY_MOBILE_NO")
-	private int easyMobileNo;
-	@Column(name="DESCRIPTION")
+	@Column(name = "EASY_MOBILE_NO")
+	private String easyMobileNo;
+	@Column(name = "DESCRIPTION")
 	private String description;
 
 	@OneToOne
 	@JoinColumn(name = "COMPANY_ID")
 	private Company company;
+
+	@OneToOne(orphanRemoval=true)
+	@JoinColumn(name = "EASY_MOBILE_ID", insertable = false, updatable = false)
+	private EasyRechargeBalance easyRechargeBalance;
 
 	public long getEasyMobileId() {
 		return easyMobileId;
@@ -43,14 +49,14 @@ public class EasyMobileNo {
 		this.easyMobileId = easyMobileId;
 	}
 
-	public int getEasyMobileNo() {
+	public String getEasyMobileNo() {
 		return easyMobileNo;
 	}
 
-	public void setEasyMobileNo(int easyMobileNo) {
+	public void setEasyMobileNo(String easyMobileNo) {
 		this.easyMobileNo = easyMobileNo;
 	}
-	
+
 	public String getDescription() {
 		return description;
 	}
@@ -67,5 +73,14 @@ public class EasyMobileNo {
 		this.company = company;
 	}
 
+	public EasyRechargeBalance getEasyRechargeBalance() {
+		return easyRechargeBalance;
+	}
+
+	public void setEasyRechargeBalance(EasyRechargeBalance easyRechargeBalance) {
+		this.easyRechargeBalance = easyRechargeBalance;
+	}
 	
+	
+
 }

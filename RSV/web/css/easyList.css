@@ -1,0 +1,127 @@
+@CHARSET "UTF-8";
+
+#detailsDiv .easyContainer {
+	max-width: 90%;
+	margin: 20px auto;
+}
+
+.easyContainer div {
+	border-radius: 5px;
+	height:510px;
+	width:25%;
+	position: relative;
+	float: left;
+	
+}
+
+div.silver,.plat {	
+	width: 90%;
+	background: rgba(255, 255, 255, 1);
+	text-align: center;
+	box-shadow: 0px 0px 4px 1px #ccc, 0px 0px 4px 1px #ccc;
+    -moz-box-shadow: 0px 0px 4px 1px #ccc, 0px 0px 4px 1px #ccc;
+    -webkit-box-shadow: 0px 0px 4px 1px #ccc, 0px 0px 4px 1px #ccc;
+	transition: all ease-in-out .2s;
+}
+
+.silver:hover {
+	
+	width: 91%;
+	top: -10px;
+	padding: 10px 0;
+	background: #07c1ad;
+	text-align: center;
+	border-radius: 5px; & > . price { background : rgba( 255, 255, 255, 1);
+	color: rgba(0, 0, 0, .7);
+}
+
+&
+>
+h1, & > h2, & > p, & > span {
+	color: rgba(255, 255, 255, 1);
+}
+
+}
+.gold {
+	float: left;
+	position: relative;
+	width: 250px;
+	top: -50px;
+	padding: 50px 0;
+	background: rgba(52, 152, 219, 1.0);
+	text-align: center;
+	border-radius: 5px; & > . price { background : rgba( 255, 255, 255, 1);
+	color: rgba(0, 0, 0, .7);
+}
+
+&
+>
+h1, & > h2, & > p, & > span {
+	color: rgba(255, 255, 255, 1);
+}
+
+}
+#detailsDiv h1 {
+	margin: 20px 0 10px 0;
+	font-size: 1.25em;
+	color: rgba(0, 0, 0, 0.8);
+}
+
+#detailsDiv h2 {
+	font-size: .75em;
+	color: rgba(0, 0, 0, .6);
+	font-weight: 100;
+	letter-spacing: 1px;
+}
+
+#detailsDiv p {
+	color: rgba(0, 0, 0, .4);
+	margin: 10px 0;
+	font-weight: 100;
+	font-size: .75em;
+}
+
+#detailsDiv span {
+	margin-bottom: 20px;
+	padding-bottom: 2px;
+	display: inline-block;
+	width: 125px;
+	font-size: 1em;
+	font-weight: 700;
+	letter-spacing: 1px;
+	color: rgba(0, 0, 0, .5);
+	border-bottom: 1px solid rgba(0, 0, 0, .1);
+}
+
+#detailsDiv .price {
+	height: 100px;
+	width: 70%;
+	text-align: center;
+	background-color: rgba(231, 76, 60, 1.0);
+	border-radius: 50%;
+	line-height: 100px;
+	color: #fff;
+	font-size: 1.5em;
+	font-weight: 100;
+	margin: 20px 40px;
+}
+
+#detailsDiv button {
+	display: block;
+	margin: 20px auto;
+	width: 150px;
+	height: 35px;
+	border-bottom: 5px solid rgba(192, 57, 43, 1.0);
+	background: rgba(231, 76, 60, 1.0);
+	border: none;
+	border-radius: 5px;
+	color: rgba(255, 255, 255, 1);
+	font-size: .75em;
+	font-weight: 100;
+	transition: all ease-in-out .2s;
+}
+
+#detailsDiv button:hover {
+	cursor: pointer;
+	background: rgba(192, 57, 43, 1.0);
+}
