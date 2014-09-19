@@ -60,6 +60,7 @@
 			<result name="SUCCESS">/productList.jsp</result>
 		</action>
 		<action name="productRegister" method="productRegister" class="sathish.app.action.UserAction">
+			<result name="LIST" type="redirectAction">product</result>
 			<result name="SUCCESS">/productRegister.jsp</result>
 		</action>
 		<action name="addProduct" method="addProduct" class="sathish.app.action.UserAction">
@@ -77,6 +78,7 @@
 			<result name="SUCCESS">/customerList.jsp</result>
 		</action>
 		<action name="customerRegister" method="customerRegister" class="sathish.app.action.UserAction">
+			<result name="LIST" type="redirectAction">customer</result>
 			<result name="SUCCESS">/customerRegister.jsp</result>
 		</action>
 		<action name="addCustomer" method="addCustomer" class="sathish.app.action.UserAction">
@@ -136,6 +138,15 @@
 		<action name="easyRechargeDetails" method="easyRechargeDetails" class="sathish.app.action.UserAction">
 			<result name="SUCCESS">/easyRechargeDetails.jsp</result>
 			<result name="loadCash">/loadCash.jsp</result>
+		</action>
+		<action name="loadMobileForm" method="loadMobileForm" class="sathish.app.action.UserAction">
+			<result name="SUCCESS">/addEasyMobileNo.jsp</result>
+		</action>
+		<action name="loadEasyCash" method="loadEasyCash" class="sathish.app.action.UserAction">
+			<result name="SUCCESS">/loadCash.jsp</result>
+		</action>
+		<action name="addEasyMobileNo" method="addEasyMobileNo" class="sathish.app.action.UserAction">
+			<result name="SUCCESS">/addEasyMobileNo.jsp</result>
 		</action>
 
 		<action name="rechargeRegister" method="rechargeRegister" class="sathish.app.action.UserAction">

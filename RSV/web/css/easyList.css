@@ -2,36 +2,35 @@
 
 #detailsDiv .easyContainer {
 	max-width: 90%;
-	margin: 20px auto;
+	margin: 15px auto;
+	height: auto;
 }
 
 .easyContainer div {
-	border-radius: 5px;
-	height:510px;
-	width:25%;
+	border-radius: 0px;
+	height: 450px;
+	width: 20%;
 	position: relative;
 	float: left;
-	
 }
 
-div.silver,.plat {	
-	width: 90%;
+div.silver,.plat {
+	width: 100%;
 	background: rgba(255, 255, 255, 1);
 	text-align: center;
-	box-shadow: 0px 0px 4px 1px #ccc, 0px 0px 4px 1px #ccc;
-    -moz-box-shadow: 0px 0px 4px 1px #ccc, 0px 0px 4px 1px #ccc;
-    -webkit-box-shadow: 0px 0px 4px 1px #ccc, 0px 0px 4px 1px #ccc;
+	/* 	box-shadow: 0px 0px 4px 1px #ccc, 0px 0px 4px 1px #ccc; */
+	/*     -moz-box-shadow: 0px 0px 4px 1px #ccc, 0px 0px 4px 1px #ccc; */
+	/*     -webkit-box-shadow: 0px 0px 4px 1px #ccc, 0px 0px 4px 1px #ccc; */
 	transition: all ease-in-out .2s;
 }
 
 .silver:hover {
-	
-	width: 91%;
+	width: 100%;
 	top: -10px;
-	padding: 10px 0;
-	background: #07c1ad;
+	padding: 5px 0;
+	background: #95a5a6;
 	text-align: center;
-	border-radius: 5px; & > . price { background : rgba( 255, 255, 255, 1);
+	/* 	border-radius: 5px; & > . price { background : rgba( 255, 255, 255, 1); */
 	color: rgba(0, 0, 0, .7);
 }
 
@@ -62,7 +61,7 @@ h1, & > h2, & > p, & > span {
 
 }
 #detailsDiv h1 {
-	margin: 20px 0 10px 0;
+	margin: 10px 0 10px 0;
 	font-size: 1.25em;
 	color: rgba(0, 0, 0, 0.8);
 }
@@ -76,13 +75,13 @@ h1, & > h2, & > p, & > span {
 
 #detailsDiv p {
 	color: rgba(0, 0, 0, .4);
-	margin: 10px 0;
+	margin: 5px 0;
 	font-weight: 100;
 	font-size: .75em;
 }
 
 #detailsDiv span {
-	margin-bottom: 20px;
+	margin-bottom: 5px;
 	padding-bottom: 2px;
 	display: inline-block;
 	width: 125px;
@@ -95,15 +94,16 @@ h1, & > h2, & > p, & > span {
 
 #detailsDiv .price {
 	height: 100px;
-	width: 70%;
+	width: 50%;
 	text-align: center;
-	background-color: rgba(231, 76, 60, 1.0);
+	background-color: #41cac0;
 	border-radius: 50%;
 	line-height: 100px;
 	color: #fff;
 	font-size: 1.5em;
 	font-weight: 100;
-	margin: 20px 40px;
+	margin: 10px 35px;
+	padding: 20px;
 }
 
 #detailsDiv button {
@@ -112,7 +112,7 @@ h1, & > h2, & > p, & > span {
 	width: 150px;
 	height: 35px;
 	border-bottom: 5px solid rgba(192, 57, 43, 1.0);
-	background: rgba(231, 76, 60, 1.0);
+	background: #41cac0;
 	border: none;
 	border-radius: 5px;
 	color: rgba(255, 255, 255, 1);
@@ -123,5 +123,9 @@ h1, & > h2, & > p, & > span {
 
 #detailsDiv button:hover {
 	cursor: pointer;
-	background: rgba(192, 57, 43, 1.0);
+	background: #01a89e;
+}
+
+#detailsDiv .silver:hover h1,#detailsDiv .silver:hover h2,.silver:hover p, .silver:hover span{
+	color: #ffffff;
 }

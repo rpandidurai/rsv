@@ -55,12 +55,12 @@ function eventKeyDown(event) {
 				//alert(res.split(',')[0]+' -- '+res.split(',')[1]);
 				if(res.split(',')[1] != ''){
 				    $('#stock_'+rowValue).text(res.split(',')[1]);
-				    $('#stock_'+rowValue).attr('class', 'bold c-green');
+				    $('#stock_'+rowValue).attr('class', 'badge bg-info');
 				    $('#quantity_'+rowValue).prop('readonly', false);
 				    $('#quantity_'+rowValue).val(0);
 				} else { 
 					$('#stock_'+rowValue).text(0);
-					$('#stock_'+rowValue).attr('class','bold c-red');
+					$('#stock_'+rowValue).attr('class','badge bg-important');
 					$('#quantity_'+rowValue).prop('readonly', true);
 				}
 				if(res.split(',')[0] != ''){
@@ -119,7 +119,7 @@ function eventKeyDown(event) {
     		return false;
     	}    	
     	var unitRate = parseFloat($('#unitRate_'+rowValue).val());
-    	$('#amount_'+rowValue).val(quantity * unitRate);
+    	$('#amount_'+rowValue).val((quantity * unitRate).toFixed(2));
     	
     	var totalQuantity = 0;
         for (var i = 0; i <= rowCount; i++) {
@@ -135,7 +135,7 @@ function eventKeyDown(event) {
             if (!isNaN(amount))
                 totalAmount += parseFloat(amount);
         }
-        $('#totalAmount').val(totalAmount);
+        $('#totalAmount').val(totalAmount.toFixed(2));
     	
     	return true;
     	
@@ -158,7 +158,7 @@ function eventKeyDown(event) {
 				if (!isNaN(amount))
 					totalAmount += parseFloat(amount);
 			}
-			$('#totalAmount').val(totalAmount);
+			$('#totalAmount').val(totalAmount.toFixed(2));
 		} else if (2 === flag) {
 			var totalQuantity = 0;
 			for (var i = 0; i <= rowCount; i++) {
@@ -192,7 +192,7 @@ function eventKeyDown(event) {
 				+ '" name="salesEntry.salesDetailsList['
 				+ rowCount
 				+ '].quantity" value="0" /></td>'
-				+ '<td><s:textfield theme="simple" size="20" cssClass="ps_text_1" name="salesEntry.salesDetailsList['+rowCount+'].unitRate" id="unitRate_'+rowCount+'" value="0" readonly="false" /></td>'
+				+ '<td><s:textfield theme="simple" size="20" cssClass="ps_text_1" onblur="calculateSales('+rowCount+')" name="salesEntry.salesDetailsList['+rowCount+'].unitRate" id="unitRate_'+rowCount+'" value="0" readonly="false" /></td>'
 				+ '<td><s:textfield theme="simple" size="20" cssClass="ps_text_1" id="amount_'
 				+ rowCount
 				+ '" onblur="calculateTotal(1)" name="salesEntry.salesDetailsList['
@@ -208,6 +208,7 @@ function eventKeyDown(event) {
 			$('#salesEntryTr_' + rowCount).remove();
 			$('#rowCount').val(rowCount - 1);
 		}
+		calculateTotal(1);
 	}
 </script>
 <s:include value="header.jsp" />
@@ -317,7 +318,7 @@ function eventKeyDown(event) {
 															<td><s:textfield theme="simple" size="10" cssClass="ps_text_1 digits" onblur="calculateSales(%{#stats.index});" id="quantity_%{#stats.index}"
 																	name="salesEntry.salesDetailsList[%{#stats.index}].quantity" value="%{quantity}" /></td>
 															<td><s:textfield theme="simple" size="10" cssClass="ps_text_1" name="salesEntry.salesDetailsList[%{#stats.index}].unitRate" id="unitRate_%{#stats.index}" value="%{unitRate}"
-																	readonly="false" /></td>
+																	onblur="calculateSales(%{#stats.index});" readonly="false" /></td>
 															<td><s:textfield theme="simple" size="20" cssClass="ps_text_1" onblur="calculateTotal(1);" id="amount_%{#stats.index}" name="salesEntry.salesDetailsList[%{#stats.index}].amount"
 																	readonly="true" value="%{amount}" /></td>
 															<%-- 													<td><s:a> --%>
@@ -329,10 +330,10 @@ function eventKeyDown(event) {
 												</table>
 												<table id="salesTotalTble">
 													<tr>
-														<td colspan="2" width="43%"><a onclick="addRow();" class="btn b-green"> <span class="fa-plus"></span></a> &nbsp; <a class="btn b-red" onclick="delRow();"> <span
-																class="fa-minus"></span></a><span style="padding-left: 70%;">Total</span></td>
+														<td colspan="2" width="43%"><a onclick="addRow();" class="btn b-green"> <span class="fa-plus"></span></a> &nbsp; <a class="btn b-red" onclick="delRow();"> <span class="fa-minus"></span></a><span
+															style="padding-left: 70%;">Total</span></td>
 														<td width="15%"><s:textfield theme="simple" size="30" cssClass="ps_text_1" id="totalQuantity" readonly="true" name="salesEntry.totalQuantity" value="%{totalQuantity}" /></td>
-<!-- 														<td width="15%">&nbsp;</td> -->
+														<!-- 														<td width="15%">&nbsp;</td> -->
 														<td width="15%"><s:textfield theme="simple" size="20" cssClass="ps_text_1" id="totalAmount" readonly="true" name="salesEntry.totalAmount" value="%{totalAmount}" /></td>
 
 													</tr>
@@ -351,7 +352,6 @@ function eventKeyDown(event) {
 							</tr>
 						</s:iterator>
 					</table>
-
 				</div>
 			</div>
 			<!-- Right side table & Form -->

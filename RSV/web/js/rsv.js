@@ -37,9 +37,12 @@ $.subscribe('complete', function(event, data) {
 			if ($('#subPage').length > 0) {
 				ajaxCall($('#subPage').val() + '.action');
 			}
-
+		} else if ($('#global').val() == 'easyRecharge') {
+			loadEasyRechargeDetails();
+			$('#availBalance').val($('#easyRechargeBalance').val());
+			$('#availCash').text($('#easyRechargeBalance').val());
 		}
-		// alert(resultData);
+		document.forms[0].reset();
 		$('#successMsg').text(resultData);
 		$('#successMsg').show().fadeOut(1000);
 	}
@@ -61,6 +64,7 @@ function deleteOk() {
 	$('#deleteId_' + $('#deleteId').val()).click();
 	$('#deleteConfirm').dialog('close');
 }
+
 function deleteNo() {
 	$('#deleteConfirm').dialog('close');
 }

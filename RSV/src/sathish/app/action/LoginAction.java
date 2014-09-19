@@ -23,7 +23,7 @@ import com.opensymphony.xwork2.ActionSupport;
 import com.opensymphony.xwork2.Preparable;
 
 /**
- * @author EswaranKuppusamy
+ * @author ps
  * 
  */
 public class LoginAction extends ActionSupport implements UserAware, SessionAware, ServletRequestAware, Preparable {

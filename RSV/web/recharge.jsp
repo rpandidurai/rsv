@@ -21,7 +21,7 @@
 	function ajaxCall(url) {
 		$.ajax({
 			url : url,
-			dataType : 'text',
+			dataType : 'html',
 			type : 'POST',
 			async : true,
 			success : function(res) {
@@ -60,15 +60,18 @@
 						<h2>Easy Recharge</h2>
 					</div>
 				</div>
-				<div id="formMessage" class="formMessage">
-					<span class="success fa-remove-sign" id="successMsg" style="display: none;"></span> <span class="failed fa-remove-sign" id="errorMsg" style="display: none;"></span>
-				</div>
+				<!-- 				<div id="formMessage" class="formMessage"> -->
+				<%-- 					<span class="success fa-remove-sign" id="successMsg" style="display: none;"></span> <span class="failed fa-remove-sign" id="errorMsg" style="display: none;"></span> --%>
+				<!-- 				</div> -->
+				<div class="clear padd-10"></div>
+				<div onclick="ajaxCall('loadMobileForm.action');" style="text-align: center;"> <button class="btn-lvl-1 b-skyBlue">Add new mobile number</button></div>
+				<div class="clear padd-10"></div>
 				<div id="detailsDiv"></div>
 				<!-- 				<div class="content-container no-print"></div> -->
 			</div>
 		</div>
 	</div>
-	<s:hidden id="global" value="purchase" />
+	<s:hidden id="global" value="easyRecharge" />
 	<s:hidden id="deleteId" />
 </div>
 <sj:dialog id="deleteConfirm" position="[430,230]" width="400" height="140" buttons="{ 'Ok':function (){deleteOk();}, 'No':function (){deleteNo();} }" title="Delete Confirmation" autoOpen="false"

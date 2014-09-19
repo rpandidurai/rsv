@@ -24,7 +24,7 @@ public interface UserService {
 
 	public List<Company> getCompanyList();
 
-	public String addProduct(ProductDetails product);
+	public boolean addProduct(ProductDetails product);
 
 	public List<ProductDetails> getProductList(int productId, int groupId);
 
@@ -55,7 +55,7 @@ public interface UserService {
 	
 	public Object getLastRecord(Class<?> entity, String property);
 
-	public String getPropertyValue(Class<?> entity, String property, String propertyId, Object id);
+	public Object getPropertyValue(Class<?> entity, String property, String propertyId, Object id);
 
 	public boolean saveOrUpdateEntity(Object persistentInstance);
 

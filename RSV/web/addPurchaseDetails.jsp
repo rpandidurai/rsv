@@ -43,6 +43,7 @@
 	}
 
 	function calculateAmount(unitRateObj) {
+		alert()
 		var row = $(unitRateObj).parent().parent().find('td').html();
 		var rowindex = parseInt(row) - 1;
 		var findHtml = 'td input[name = "purchaseEntry.purchaseDetailsList['
@@ -54,7 +55,7 @@
 
 		var amountValue = quantityValue * unitRateValue;
 
-		$(amountElementId).attr('value', amountValue);
+		$(amountElementId).attr('value', amountValue.toFixed(2));
 
 	}
 
@@ -68,8 +69,8 @@
 				if (!isNaN(amount))
 					totalAmount += parseFloat(amount);
 			}
-			$('#totalAmount').text(totalAmount);
-			$('#totalAmount_hdn').val(totalAmount);
+			$('#totalAmount').text(totalAmount.toFixed(2));
+			$('#totalAmount_hdn').val(totalAmount.toFixed(2));
 		} else if (2 === flag) { // flag 1 for quantity
 			var totalQuantity = 0;
 			for (var i = 0; i <= rowCount; i++) {
@@ -77,7 +78,7 @@
 				if (!isNaN(quantity))
 					totalQuantity += parseInt($('#quantity_' + i).val());
 			}
-// 			$('#totalQuantity').text(totalQuantity);
+			// 			$('#totalQuantity').text(totalQuantity);
 			$('#totalQuantity_hdn').val(totalQuantity);
 		}
 	}
@@ -86,7 +87,8 @@
 		console.log($('#productId_0').html());
 		var rowCount = parseInt($('#rowCount').val());
 		rowCount += 1;
-		var rowHtml = '<tr id="purchaseEntryTr_' + rowCount + '">' + '<td>'
+		var rowHtml = '<tr id="purchaseEntryTr_' + rowCount + '">'
+				+ '<td>'
 				+ (rowCount + 1)
 				+ '</td>'
 				+ '<td> <select name="purchaseEntry.purchaseDetailsList['+rowCount+'].productId" id="productId_'+rowCount+'">'
@@ -101,13 +103,14 @@
 				+ '" name="purchaseEntry.purchaseDetailsList['
 				+ rowCount
 				+ '].purchseQuantity" /></td>'
-				+ '<td><s:textfield theme="simple" size="20" cssClass="ps_text_1" onblur="calculateAmount(this);" value="0.0" name="purchaseEntry.purchaseDetailsList['
+				+ '<td><s:textfield theme="simple" size="20" cssClass="ps_text_1" onblur="calculateAmount(this);calculateTotal(1);" value="0.0" name="purchaseEntry.purchaseDetailsList['
 				+ rowCount
 				+ '].unitRate" /></td>'
 				+ '<td><s:textfield theme="simple" size="20" cssClass="ps_text_1" readonly="true" id="amount_'
 				+ rowCount
-				+ '" onblur="calculateTotal(1)" value="0" name="purchaseEntry.purchaseDetailsList['
-				+ rowCount + '].amount" /></td>' + '</tr>';
+				+ '" onblur="" value="0" name="purchaseEntry.purchaseDetailsList['
+				+ rowCount + '].amount" /></td>'
+				+ '</tr>';
 		$('#purchaseEntryTable').append(rowHtml);
 		$('#rowCount').val(rowCount);
 	}
@@ -117,6 +120,8 @@
 			$('#purchaseEntryTr_' + rowCount).remove();
 			$('#rowCount').val(rowCount - 1);
 		}
+		calculateTotal(1);
+		calculateTotal(2);
 	}
 </script>
 <s:include value="header.jsp" />
@@ -228,9 +233,9 @@
 															<td><s:textfield theme="simple" size="10" cssClass="ps_text_1" readonly="true" name="purchaseEntry.purchaseDetailsList[%{#stats.index}].purchseQuantity" value="%{purchseQuantity}"
 																	onblur="calculateTotal(2);" id="quantity_%{#stats.index}" /></td>
 															<td><s:textfield theme="simple" size="10" cssClass="ps_text_1" name="purchaseEntry.purchaseDetailsList[%{#stats.index}].unitRate" value="%{unitRate}"
-																	onblur="calculateAmount(this);" /></td>
-															<td><s:textfield theme="simple" size="20" cssClass="ps_text_1" readonly="true" name="purchaseEntry.purchaseDetailsList[%{#stats.index}].amount" value="%{amount}"
-																	onblur="calculateTotal(1);" id="amount_%{#stats.index}" /></td>
+																	onblur="calculateAmount(this); calculateTotal(1);" /></td>
+															<td><s:textfield theme="simple" size="20" cssClass="ps_text_1" readonly="true" name="purchaseEntry.purchaseDetailsList[%{#stats.index}].amount" value="%{amount}" onblur=""
+																	id="amount_%{#stats.index}" /></td>
 														</tr>
 														<s:set var="rowCount" value="%{#stats.index}" />
 													</s:iterator>
@@ -242,9 +247,10 @@
 														<a onclick="addRow();" class="btn b-green"> <span class="fa-plus"></span></a> &nbsp; <a class="btn b-red" onclick="delRow();"> <span class="fa-minus"></span></a> <span
 															style="padding-left: 60%;">Total Purchase Amount</span>
 													</div>
-													<div class="totalFont">
-														<span id="totalAmount"> <s:property value="%{totalAmount}" />
-														</span> <span>Rs</span>
+													<div class="totalFont c-green">
+														<span class="fa-inr" id="totalAmount"> <s:property value="%{totalAmount}" />
+														</span>
+														<%-- 														 <span class="fa-inr"></span> --%>
 													</div>
 													<!-- 													 <div></div> -->
 													<s:hidden theme="simple" id="totalQuantity_hdn" readonly="true" name="purchaseEntry.totalQuantity" value="%{totalQuantity}" />

@@ -5,6 +5,7 @@ package sathish.app.action;
 
 import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
@@ -36,7 +37,7 @@ import com.opensymphony.xwork2.ActionSupport;
 import com.opensymphony.xwork2.Preparable;
 
 /**
- * @author root
+ * @author ps
  * 
  */
 public class UserAction extends ActionSupport implements SessionAware, Preparable {
@@ -102,7 +103,7 @@ public class UserAction extends ActionSupport implements SessionAware, Preparabl
 	public String productRegister() {
 		logger.info("Add/Update New Product");
 
-		String status = "";
+		boolean status = false;
 		String message = "Product Added Successfully";
 
 		if (this.product.getProductId() > 0) {
@@ -112,14 +113,16 @@ public class UserAction extends ActionSupport implements SessionAware, Preparabl
 		status = userService.addProduct(this.product);
 
 		this.productGroupList = userService.getAllRecords(ProductGroup.class);
-		this.productList.add(this.product);
-		if ("added".equals(status)) {
+
+		if (status) {
+			this.productList.add(new ProductDetails());
 			logger.info(message);
 			addActionMessage(message);
-			return "SUCCESS";
+			return "LIST";
 		} else {
+			this.productList.add(this.product);
 			addActionError("Product Adding Failed");
-			return "FAIL";
+			return "SUCCESS";
 		}
 	}
 
@@ -159,14 +162,15 @@ public class UserAction extends ActionSupport implements SessionAware, Preparabl
 		}
 		status = userService.saveOrUpdateEntity(this.customer);
 
-		this.customerList.add(this.customer);
 		if (status) {
+			this.customerList.add(new CustomerDetails());
 			logger.info(message);
 			addActionMessage(message);
-			return "SUCCESS";
+			return "LIST";
 		} else {
+			this.customerList.add(this.customer);
 			addActionError("Customer add/update Failed");
-			return "FAIL";
+			return "SUCCESS";
 		}
 	}
 
@@ -229,7 +233,7 @@ public class UserAction extends ActionSupport implements SessionAware, Preparabl
 		logger.info("Sales salesRegister");
 		boolean status = false;
 		String message = "";
-
+		SalesEntry lastSale;
 		if (this.salesEntry.getSalesEntryId() > 0) {
 			message = "Sales Entry Updated Successfully";
 		} else {
@@ -239,8 +243,12 @@ public class UserAction extends ActionSupport implements SessionAware, Preparabl
 		// salesEntryId = userService.addSalesEntry(this.salesEntry);
 
 		status = userService.saveOrUpdateEntity(this.salesEntry);
-
+		if (status) {
+			lastSale = (SalesEntry) userService.getLastRecord(SalesEntry.class, "salesEntryId");
+			updateSalesStock(lastSale.getSalesDetailsList());
+		}
 		this.setCustomerList(userService.getCustomerList(0));
+		this.deliveryBoysList = userService.getAllRecords(DeliveryBoys.class);
 		this.productList = userService.getProductList(0, 0);
 
 		if (status) {
@@ -347,6 +355,7 @@ public class UserAction extends ActionSupport implements SessionAware, Preparabl
 
 		if (status) {
 			lastPurchase = (PurchaseEntry) userService.getLastRecord(PurchaseEntry.class, "purchaseId");
+			updateStock(lastPurchase.getPurchaseDetailsList());
 		}
 
 		this.productList = userService.getProductList(0, 0);
@@ -364,23 +373,60 @@ public class UserAction extends ActionSupport implements SessionAware, Preparabl
 
 	}
 
-	public Object updateStock(List<PurchaseDetails> list) {
+	public void updateStock(Collection<PurchaseDetails> list) {
 		logger.info("action : updateStock");
 		Stock stock;
+		boolean status = false;
 		try {
+			for (PurchaseDetails purchase : list) {
+				int inStock = Integer.parseInt((String) userService.getPropertyValue(Stock.class, "inStock", "stockId",
+						purchase.getProductId()));
+				logger.info("already in stock " + inStock);
+				inStock = inStock + purchase.getPurchseQuantity();
+				logger.info("new in stock " + inStock);
 
-			for (PurchaseDetails purchaseDetails : list) {
 				stock = new Stock();
-				// stock.setProductId(purchaseDetails.getProductId());
-				stock.setInStock(purchaseDetails.getPurchseQuantity());
+
+				stock.setStockId(purchase.getProductId());
+				stock.setInStock(inStock);
 				stock.setLastTxnDate(new Date());
 
+				status = userService.saveOrUpdateEntity(stock);
+				logger.info("status " + status);
 			}
 
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		return null;
+		logger.info("all stocks r updated...");
+	}
+
+	public void updateSalesStock(Collection<SalesDetails> list) {
+		logger.info("action : updateStock");
+		Stock stock;
+		boolean status = false;
+		try {
+			for (SalesDetails sales : list) {
+				int inStock = Integer.parseInt((String) userService.getPropertyValue(Stock.class, "inStock", "stockId",
+						sales.getProductId()));
+				logger.info("already in stock " + inStock);
+				inStock = inStock - sales.getQuantity();
+				logger.info("new in stock " + inStock);
+
+				stock = new Stock();
+
+				stock.setStockId(sales.getProductId());
+				stock.setInStock(inStock);
+				stock.setLastTxnDate(new Date());
+
+				status = userService.saveOrUpdateEntity(stock);
+				logger.info("status " + status);
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		logger.info("all stocks r updated...");
 	}
 
 	public String deletePurchaseEntry() {
@@ -510,8 +556,8 @@ public class UserAction extends ActionSupport implements SessionAware, Preparabl
 		logger.info("UserAction : getProductStock");
 		String value = "";
 		try {
-			value = userService.getPropertyValue(ProductDetails.class, "productUnitRate", "productId", (int) filterId);
-			value = value + "," + userService.getPropertyValue(Stock.class, "inStock", "stockId", filterId);
+			value = (String) userService.getPropertyValue(ProductDetails.class, "productUnitRate", "productId", (int) filterId);
+			value = value + "," + userService.getPropertyValue(Stock.class, "inStock", "stockId", (int) filterId);
 			System.out.println("value ------------------- " + value);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -538,8 +584,10 @@ public class UserAction extends ActionSupport implements SessionAware, Preparabl
 		String returnPage = "";
 		try {
 			if (this.filterId > 0) {
-				easyRechargeBalanceList = new ArrayList<EasyRechargeBalance>();
-				easyRechargeBalanceList.add(new EasyRechargeBalance());
+//				easyRechargeBalanceList = new ArrayList<EasyRechargeBalance>();
+//				easyRechargeBalanceList.add(new EasyRechargeBalance());
+				easyRechargeBalance = (EasyRechargeBalance) userService.getById(EasyRechargeBalance.class, filterId);
+				easyRechargeBalanceList.add(easyRechargeBalance);
 				returnPage = "loadCash";
 			} else {
 				easyRechargeBalanceList = userService.getAllRecords(EasyRechargeBalance.class);
@@ -549,6 +597,17 @@ public class UserAction extends ActionSupport implements SessionAware, Preparabl
 			e.printStackTrace();
 		}
 		return returnPage;
+	}
+
+	public String loadMobileForm() {
+		logger.info("UserAction : loadMobileForm");
+		try {
+			this.easyMobileNoList.add(new EasyMobileNo());
+			this.companyList = userService.getCompanyList();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return "SUCCESS";
 	}
 
 	public String addEasyMobileNo() {
@@ -565,10 +624,10 @@ public class UserAction extends ActionSupport implements SessionAware, Preparabl
 			if (status) {
 				logger.info(message);
 				addActionMessage(message);
-				return "SUCCESS";
+				// return "SUCCESS";
 			} else {
 				addActionError("Mobile Number adding failed");
-				return "FAIL";
+				// return "FAIL";
 			}
 		} catch (Exception e) {
 			message = "Something went wrong while adding mobile no";
@@ -580,24 +639,24 @@ public class UserAction extends ActionSupport implements SessionAware, Preparabl
 		return "stream";
 	}
 
-	public String addEasyRecharge() {
-		logger.info("UserAction : addEasyMobileNo");
+	public String loadEasyCash() {
+		logger.info("UserAction : loadEasyCash");
 		String message = "Load Cash Successfully";
 		boolean status = false;
 		try {
-			status = userService.saveOrUpdateEntity(easyRecharge);
+			status = userService.saveOrUpdateEntity(easyRechargeBalance);
 
-			if (this.easyRecharge.getEasyRechargeId() > 0) {
+			if (this.easyRechargeBalance.getEasyMobileId() > 0) {
 				message = "Load Cash Updated Successfully";
 			}
 
 			if (status) {
 				logger.info(message);
 				addActionMessage(message);
-				return "SUCCESS";
+				// return "SUCCESS";
 			} else {
 				addActionError("Load Cash adding failed");
-				return "FAIL";
+				// return "FAIL";
 			}
 		} catch (Exception e) {
 			message = "Something went wrong while Load Cash";

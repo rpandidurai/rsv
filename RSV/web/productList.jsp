@@ -5,11 +5,12 @@
 <div class="clear tabledata">
 	<table>
 		<tr>
-			<th width="10%">S.No</th>
+			<th width="4%">S.No</th>
 			<th width="15%">Product Name</th>
 			<th width="10%">Unit Rate</th>
 			<th width="30%">Benefit</th>
-			<th width="10%">Validity</th>
+			<th width="10%">Stock</th>
+			<th width="6%">Validity</th>
 			<th width="10%">Group</th>
 			<th width="10%" class="no-print">Action</th>
 		</tr>
@@ -19,6 +20,7 @@
 				<td><s:property value="productName" /></td>
 				<td><s:property value="productUnitRate" /></td>
 				<td><s:property value="productBenefits" /></td>
+				<td><span class="badge bg-info"><b><s:property value="stock.inStock" /></b></span></td>
 				<td><s:property value="productValidity" /></td>
 				<td><s:property value="productGroup.groupName" /></td>
 				<td class="no-print"><s:a action="addProduct?filterId=%{productId}">

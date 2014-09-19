@@ -3,6 +3,7 @@
  */
 package sathish.app.dto;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -37,7 +38,7 @@ public class EasyMobileNo {
 	@JoinColumn(name = "COMPANY_ID")
 	private Company company;
 
-	@OneToOne(orphanRemoval=true)
+	@OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
 	@JoinColumn(name = "EASY_MOBILE_ID", insertable = false, updatable = false)
 	private EasyRechargeBalance easyRechargeBalance;
 
@@ -80,7 +81,5 @@ public class EasyMobileNo {
 	public void setEasyRechargeBalance(EasyRechargeBalance easyRechargeBalance) {
 		this.easyRechargeBalance = easyRechargeBalance;
 	}
-	
-	
 
 }

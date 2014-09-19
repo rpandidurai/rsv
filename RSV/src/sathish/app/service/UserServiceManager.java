@@ -115,12 +115,12 @@ public class UserServiceManager implements UserService {
 	}
 
 	@Override
-	public String addProduct(ProductDetails product) {
+	public boolean addProduct(ProductDetails product) {
 		// TODO Auto-generated method stub
 		logger.info("service : add product");
 		Session session = null;
 		Transaction tx = null;
-		String status = "";
+		boolean status = false;
 		int productId = 0;
 		try {
 			session = sessionFactory.openSession();
@@ -129,7 +129,7 @@ public class UserServiceManager implements UserService {
 			productId = 1;
 			tx.commit();
 			if (productId > 0) {
-				status = "added";
+				status = true;
 			}
 		} catch (HibernateException e) {
 			logger.info("Error in adding product");
@@ -574,17 +574,17 @@ public class UserServiceManager implements UserService {
 		return persistentInstance;
 	}
 
-	public String getPropertyValue(Class<?> entity, String property, String propertyId, Object id) {
+	public Object getPropertyValue(Class<?> entity, String property, String propertyId, Object id) {
 		String value = "";
 		Session session = null;
 		Object result = null;
 		try {
 			session = sessionFactory.openSession();
-
+			System.out.println("b4 1  result " + id);
 			Criteria criteria = session.createCriteria(entity);
 			criteria.setProjection(Projections.property(property));
 			criteria.add(Restrictions.eq(propertyId, id)).addOrder(Order.desc(propertyId)).setMaxResults(1);
-
+			System.out.println("b4 result ");
 			result = criteria.uniqueResult();
 
 			if (result != null)

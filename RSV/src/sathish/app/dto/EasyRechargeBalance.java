@@ -13,6 +13,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
+import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 
 /**
@@ -25,6 +26,9 @@ public class EasyRechargeBalance {
 
 	public EasyRechargeBalance() {
 		// TODO Auto-generated constructor stub
+
+		this.easyRechargeBalance = 0;
+		this.lastTxnDate = new Date();
 	}
 
 	@Id
@@ -36,10 +40,10 @@ public class EasyRechargeBalance {
 	@Column(name = "LAST_TXN_DATE")
 	private Date lastTxnDate;
 	@Column(name = "DESCRIPTION")
-	private String descrption;
+	private String description;
 
 	@OneToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "EASY_MOBILE_ID", insertable = false, updatable = false)
+	@PrimaryKeyJoinColumn
 	private EasyMobileNo easyMobileNo;
 
 	public long getEasyMobileId() {
@@ -66,13 +70,6 @@ public class EasyRechargeBalance {
 		this.lastTxnDate = lastTxnDate;
 	}
 
-	public String getDescrption() {
-		return descrption;
-	}
-
-	public void setDescrption(String descrption) {
-		this.descrption = descrption;
-	}
 
 	public EasyMobileNo getEasyMobileNo() {
 		return easyMobileNo;
@@ -81,5 +78,16 @@ public class EasyRechargeBalance {
 	public void setEasyMobileNo(EasyMobileNo easyMobileNo) {
 		this.easyMobileNo = easyMobileNo;
 	}
+
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
+	
+	
 
 }

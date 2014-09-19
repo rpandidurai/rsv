@@ -337,12 +337,14 @@ span .btn {
 
 #totalDiv {
 	padding: 5px 0 5px 0;
-	display:table;
+	display: table;
 	width: 100%;
 }
-#totalDiv div{
+
+#totalDiv div {
 	display: table-cell;
 }
+
 #totalDiv span .btn {
 	padding: 2px;
 	width: 30px;
@@ -354,4 +356,54 @@ span .btn {
 	width: 20%;
 	font-weight: bold;
 	font-size: 2em;
+}
+
+.badge {
+	display: inline-block;
+	min-width: 10px;
+	padding: 3px 7px;
+	/* 	font-size: 12px; */
+	font-weight: bold;
+	line-height: 1;
+	color: #fff;
+	text-align: center;
+	white-space: nowrap;
+	vertical-align: baseline;
+	background-color: #777;
+	border-radius: 10px;
+}
+
+.badge.bg-info {
+	background: #41cac0;
+}
+
+.badge.bg-important {
+	background: #ff6c60;
+}
+
+.badge.bg-warning {
+	background: #FCB322;
+}
+
+.badge.bg-success {
+	background: #a9d86e;
+}
+
+.badge.bg-primary {
+	background: #8075c4;
+}
+
+.btn-lvl-1 {
+	display: block;
+	width: 100%;
+	padding: 5px 10px;
+	font-size: 18px;
+	line-height: 1.3;
+	border-radius: 6px;
+	color: #fff;
+	background-color: #d6e9c6;
+	border-color: #d6e9c6;
+	cursor: pointer;
+	font-weight: bold;
+	border: 1px solid transparent;
 }

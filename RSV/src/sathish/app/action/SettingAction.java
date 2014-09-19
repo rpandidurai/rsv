@@ -27,7 +27,7 @@ import com.opensymphony.xwork2.ActionSupport;
 import com.opensymphony.xwork2.Preparable;
 
 /**
- * @author root
+ * @author ps
  * 
  */
 public class SettingAction extends ActionSupport implements SessionAware, Preparable {

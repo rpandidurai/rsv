@@ -39,23 +39,23 @@ public class Utilities {
 
 		String[] date = curDateString.split(" ");
 		
-		recptNo = "SE" + date[0] + date[1].toUpperCase() + date[2];
+		recptNo = "RSVA" ; //+ date[0] + date[1].toUpperCase() + date[2];
 
 		System.out.println(lastBillNo+" ---- lastBillNo:recptNo ------ "+recptNo);
 		if (lastBillNo.equals("")) {
 			firstBill = true;
 			System.out.println("in 1st if >>>");
-		} else if (!recptNo.equalsIgnoreCase(lastBillNo.substring(0, 9))) {
+		} /*else if (!recptNo.equalsIgnoreCase(lastBillNo.substring(0, 4))) {
 			firstBill = true;
-			System.out.println("in 1st else >>> lastBillNo.substring(0, 8) "+lastBillNo.substring(0, 8));
-		}
+			System.out.println("in 1st else >>> lastBillNo.substring(0, 8) "+lastBillNo.substring(0, 4));
+		} */
 
 		if (firstBill) {
 			recptNo += "0001";
 			System.out.println("in if >>>");
 		} else {
-			recptNo += String.format("%04d", Integer.parseInt(lastBillNo.substring(9)) + 1);
-			System.out.println("in else >>>  lastBillNo.substring(8)  "+lastBillNo.substring(9));
+			recptNo += String.format("%04d", Integer.parseInt(lastBillNo.substring(4)) + 1);
+			System.out.println("in else >>>  lastBillNo.substring(8)  "+lastBillNo.substring(4));
 		}
 
 		System.out.println("new bill no : " + recptNo);

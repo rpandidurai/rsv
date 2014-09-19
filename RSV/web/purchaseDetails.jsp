@@ -37,7 +37,7 @@
 				<td><s:date name="invoiceDate" format="dd/MM/yyyy" /></td>
 				<td><s:property value="company.companyName" /></td>
 				<td><s:property value="totalQuantity" /></td>
-				<td><s:property value="totalAmount" /></td>
+				<td><span class="fa-inr badge bg-info"><s:property value="totalAmount" /></span></td>
 				<td class="no-print"><s:a action="addPurchase?filterId=%{purchaseId}">
 						<span class="tools icon-pencil green"></span>
 					</s:a> &nbsp; <s:a href="javascript:void(0);" onclick="confirmDelete(%{purchaseId});">

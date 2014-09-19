@@ -14,16 +14,15 @@
 					<s:property value="easyMobileNo.company.companyName" />
 				</h2>
 				<div class="price">
-					&#x20B9;
-					<s:property value="easyRechargeBalance" />
+					<b class="fa-inr"><s:property value="easyRechargeBalance" /></b>
 				</div>
 				<p>Last transaction on</p>
-				<span><s:property value="lastTxnDate" /></span>
+				<span><s:date name="lastTxnDate" format="dd MMM yyyy" /></span>
 				<p>Downloads</p>
 				<span>3</span>
 				<p>Forums</p>
 				<span>Courses Only</span>
-				<button onclick="ajaxCall('easyRechargeDetails.action?filterId=1')">Load Cash</button>
+				<button onclick="ajaxCall('easyRechargeDetails.action?filterId=<s:property value="easyMobileNo.easyMobileId" />')">Load Cash</button>
 			</div>
 		</div>
 	</s:iterator>

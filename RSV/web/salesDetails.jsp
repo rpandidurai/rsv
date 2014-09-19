@@ -25,9 +25,9 @@
 				<td><s:property value="deliveryBoys.deliveryName" /></td>
 				<td><s:date name="entryDate" format="dd/MM/yyyy" /></td>
 				<td><s:property value="totalQuantity" /></td>
-				<td><s:property value="totalAmount" /></td>
+				<td><span class="fa-inr badge bg-info"><s:property value="totalAmount" /></span></td>
 				<td><s:property value="billNo" /></td>
-				<td  class="no-print"><s:a action="addSales?filterId=%{salesEntryId}">
+				<td class="no-print"><s:a action="addSales?filterId=%{salesEntryId}">
 						<span class="tools icon-pencil green"></span>
 					</s:a> &nbsp; <s:a href="javascript:void(0);" onclick="confirmDelete(%{salesEntryId});">
 						<span class="tools icon-x red"></span>
