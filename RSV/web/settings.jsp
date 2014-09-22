@@ -34,6 +34,7 @@
 						<h2>Settings</h2>
 					</div>
 				</div>
+				<div class="padd-20"></div>
 
 				<div id="detailsDiv"></div>
 				<div class="content-container no-print">

@@ -45,7 +45,7 @@
 					<a href="loginAction.action">Home</a>- Sales Details
 				</div>
 				<div class="clear pageheadDiv">
-					<div class="pagehead">
+					<div class="pagehead left-red">
 						<h2>Sales Book</h2>
 					</div>
 				</div>

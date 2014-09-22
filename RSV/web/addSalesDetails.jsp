@@ -230,13 +230,13 @@ function eventKeyDown(event) {
 			<s:url action="registration" var="create" />
 			<div class="rightsidecont right">
 				<div class="breadcrumb left">
-					<a href="loginAction.action">Home</a>- <a href="customer.action">Sales Details</a>-
+					<a href="loginAction.action">Home</a>- <a href="sales.action">Sales Details</a>-
 					<%-- 		<s:if test="%{user.id!=null && user.id!=0}">Edit</s:if> --%>
 					<%-- 		<s:else>Create</s:else> --%>
 					Sales Details Entry
 				</div>
 				<div class="clear pageheadDiv">
-					<div class="pagehead">
+					<div class="pagehead left-red">
 						<h2>Sales Entry</h2>
 					</div>
 				</div>
