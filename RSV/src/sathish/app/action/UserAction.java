@@ -346,11 +346,12 @@ public class UserAction extends ActionSupport implements SessionAware, Preparabl
 		boolean status = false;
 		PurchaseEntry lastPurchase;
 		String message = "Purchase Entry Added Successfully";
-
+		int previousTotalQuantity = 0;
 		if (this.purchaseEntry.getPurchaseId() > 0) {
 			message = "Purchase Entry Updated Successfully";
 		}
-
+	//	previousTotalQuantity = (Integer) userService.getPropertyValue(PurchaseEntry.class, "totalQuantity", "purchaseId", this.purchaseEntry.getPurchaseId());
+		logger.info("previousTotalQuantity *************** "+previousTotalQuantity);
 		status = userService.saveOrUpdateEntity(this.purchaseEntry);
 
 		if (status) {

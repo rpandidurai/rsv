@@ -43,7 +43,7 @@
 	}
 
 	function calculateAmount(unitRateObj) {
-		alert()
+		//alert()
 		var row = $(unitRateObj).parent().parent().find('td').html();
 		var rowindex = parseInt(row) - 1;
 		var findHtml = 'td input[name = "purchaseEntry.purchaseDetailsList['
