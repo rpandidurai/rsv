@@ -156,7 +156,7 @@
 				<!-- Right side table & Form -->
 				<s:url action="registration" var="create" />
 				<div class="clear tabledata">
-					<table style="">
+					<table style=""> 
 						<s:iterator value="purchaseEntryList" var="entryList" status="statEntry" begin="0" end="0">
 							<tr>
 								<%-- 								<th colspan="5"><s:if test="%{purchaseId!=null && purchaseId!=0}">Edit</s:if> <s:else>Add</s:else> Purchase Entry</th> --%>
