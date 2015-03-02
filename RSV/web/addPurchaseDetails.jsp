@@ -164,7 +164,7 @@
 							<tr>
 								<td colspan="3"><s:form id="PurchaseDetailsForm" name="PurchaseDetailsForm" method="POST" theme="simple" action="purchaseRegister">
 										<s:hidden name="purchaseEntry.purchaseId" id="pid" value="%{purchaseId}" />
-										<div class="formdata">
+										<div class="formdata"> 
 											<div class="formBox box-shodow top-orange">
 												<div id="formMessage" class="formMessage">
 													<s:if test="hasActionMessages()">
