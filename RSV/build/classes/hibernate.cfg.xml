@@ -20,7 +20,7 @@
 			root
 		</property>
 		<property name="hibernate.connection.password">
-			pssd
+			mysql
 		</property>
 
 		<property name="show_sql">true</property>

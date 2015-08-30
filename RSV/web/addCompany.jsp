@@ -7,7 +7,7 @@
 	<span id="ajaxButton" class="fa-reply  h-skyblue c-skyblue" title="go back" onclick="ajaxCall('loadCompany.action');"></span> &nbsp; <span id="ajaxButton"
 		class="fa-pencil  h-green c-green" title="add new user" onclick="ajaxCall('company.action');"></span> &nbsp; <span class="fa-remove-sign h-red c-red" title="close"
 		onclick="closePop();"></span>
-</div>
+</div> 
 <div class="clear tabledata">
 	<s:iterator value="companyList" var="companyList" status="stats" begin="0" end="0">
 		<s:form id="companyForm" name="companyForm" method="POST" theme="simple" action="addCompany">
