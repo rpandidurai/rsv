@@ -8,7 +8,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.apache.struts2.interceptor.SessionAware;
 
 import sathish.app.dto.Company;
@@ -37,7 +38,7 @@ public class SettingAction extends ActionSupport implements SessionAware, Prepar
 	 */
 
 	private static final long serialVersionUID = 1761065583989165570L;
-	private static final Logger logger = Logger.getLogger("RSVtraders");
+	private static final Logger logger = LogManager.getLogger("RSVtraders");
 
 	private Map<String, Object> session;
 

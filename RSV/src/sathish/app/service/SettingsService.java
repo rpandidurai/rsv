@@ -7,7 +7,8 @@ import java.io.Serializable;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.hibernate.Criteria;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
@@ -25,7 +26,7 @@ import sathish.app.dto.ProductGroup;
 public class SettingsService implements Settings {
 
 	private SessionFactory sessionFactory;
-	private static final Logger logger = Logger.getLogger("RSVtraders");
+	private static final Logger logger = LogManager.getLogger("RSVtraders");
 
 	public SettingsService(Map<String, Object> session) {
 		this.sessionFactory = (SessionFactory) session.get("SessionFactory");

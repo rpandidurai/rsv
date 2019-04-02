@@ -3,7 +3,8 @@
  */
 package sathish.app.util;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 /**
  * @author root
@@ -11,7 +12,7 @@ import org.apache.log4j.Logger;
  */
 public class SessionMaintain {
 
-	private static final Logger logger = Logger.getLogger("RSVtraders");
+	private static final Logger logger = LogManager.getLogger("RSVtraders");
 	
 	public SessionMaintain() {
 		// TODO Auto-generated constructor stub

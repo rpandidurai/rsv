@@ -17,16 +17,18 @@ import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.sql.DataSource;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 /*
 import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.sql.DataSource;
 */
-import org.apache.log4j.Logger;
 
 public class DBConnection {
 	
-	private static final Logger logger = Logger.getLogger("RSVtraders");
+	private static final Logger logger = LogManager.getLogger("RSVtraders");
 	public static Connection makeConnection(){
 		Connection connection = null;
 		try {

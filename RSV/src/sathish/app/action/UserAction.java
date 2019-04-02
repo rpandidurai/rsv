@@ -7,11 +7,11 @@ import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.apache.struts2.interceptor.SessionAware;
 
 import sathish.app.dto.Company;
@@ -47,7 +47,7 @@ public class UserAction extends ActionSupport implements SessionAware, Preparabl
 	 */
 
 	private static final long serialVersionUID = 707747804953526346L;
-	private static final Logger logger = Logger.getLogger("RSVtraders");
+	private static final Logger logger = LogManager.getLogger("RSVtraders");
 	private Utilities utils = new Utilities();
 
 	private Map<String, Object> session;

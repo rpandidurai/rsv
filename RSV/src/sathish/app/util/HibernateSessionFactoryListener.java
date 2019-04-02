@@ -6,50 +6,52 @@ package sathish.app.util;
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
 
-import org.apache.log4j.Logger;
-import org.hibernate.SessionFactory;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
-import org.hibernate.cfg.Configuration;
+import org.hibernate.cfg.*;
 import org.hibernate.service.ServiceRegistry;
-
+import org.hibernate.*;
 /**
  * @author root
  * 
  */
 public class HibernateSessionFactoryListener implements ServletContextListener {
 
-	private static final Logger logger = Logger.getLogger("RSVtraders");
+	private static final Logger logger = LogManager.getLogger("RSVtraders");
 
 	@Override
 	public void contextInitialized(ServletContextEvent servletContextEvent) {
 		// TODO Auto-generated method stub
-		logger.info("Initialize Context");
+		logger.debug("Initialize Context");
 		SessionFactory sessionFactory;
 		ServiceRegistry serviceRegistry;
 
 		Configuration configuration = new Configuration();
 		configuration.configure();
 
-		serviceRegistry = new StandardServiceRegistryBuilder().applySettings(configuration.getProperties()).build();
-		sessionFactory = configuration.buildSessionFactory(serviceRegistry);
+//		serviceRegistry = new StandardServiceRegistryBuilder().applySettings(configuration.getProperties()).build();
+//		sessionFactory = configuration.buildSessionFactory(serviceRegistry);
 
-		logger.info("SessionFactory created successfully");
+		sessionFactory = new Configuration().configure().buildSessionFactory();
+		
+		logger.debug("SessionFactory created successfully");
 
 		servletContextEvent.getServletContext().setAttribute("SessionFactory", sessionFactory);
 
-		logger.info("Hibernate SessionFactory Configured successfully");
+		logger.debug("Hibernate SessionFactory Configured successfully");
 	}
 
 	@Override
 	public void contextDestroyed(ServletContextEvent servletContextEvent) {
 		// TODO Auto-generated method stub
-		logger.info("Destroy Context");
+		logger.debug("Destroy Context");
 		SessionFactory sessionFactory = (SessionFactory) servletContextEvent.getServletContext().getAttribute("SessionFactory");
 		if (sessionFactory != null && !sessionFactory.isClosed()) {
-			logger.info("Closing sessionFactory");
+			logger.debug("Closing sessionFactory");
 			sessionFactory.close();
 		}
-		logger.info("Released Hibernate sessionFactory resource");
+		logger.debug("Released Hibernate sessionFactory resource");
 	}
 
 }

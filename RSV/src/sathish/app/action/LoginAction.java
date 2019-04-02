@@ -7,8 +7,8 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
-import org.apache.log4j.Logger;
-import org.apache.struts2.interceptor.RequestAware;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.apache.struts2.interceptor.ServletRequestAware;
 import org.apache.struts2.interceptor.SessionAware;
 import org.hibernate.SessionFactory;
@@ -17,7 +17,6 @@ import sathish.app.dto.UserDetail;
 import sathish.app.interceptors.UserAware;
 import sathish.app.service.LoginService;
 import sathish.app.service.LoginServiceManager;
-import sathish.app.util.Utilities;
 
 import com.opensymphony.xwork2.ActionSupport;
 import com.opensymphony.xwork2.Preparable;
@@ -33,7 +32,7 @@ public class LoginAction extends ActionSupport implements UserAware, SessionAwar
 	 */
 
 	private static final long serialVersionUID = -264520247252022735L;
-	private static final Logger logger = Logger.getLogger("RSVtraders");
+	private static final Logger logger = LogManager.getLogger("RSVtraders");
 
 	private Map<String, Object> session;
 	private HttpServletRequest request;

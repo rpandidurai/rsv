@@ -19,6 +19,10 @@ import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.criterion.Restrictions;
 
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Selection;
+
 import sathish.app.service.DBConnection;
 import sathish.app.action.UserAction;
 import sathish.app.dto.ProductDetails;
@@ -75,7 +79,9 @@ public class LoginServiceManager implements LoginService {
 		UserDetail loggedUser = null;
 		try {
 			tx = hsession.beginTransaction();
-			List<UserDetail> userDetails = hsession.createCriteria(UserDetail.class).add(Restrictions.eq("userName", user.getUserName())).list(); // .createQuery("FROM UserDetail")..list();
+			List<UserDetail> userDetails = hsession.createQuery("FROM UserDetail").list();
+//			hsession.createCriteria(UserDetail.class).add(CriteriaQuery<UserDetail.class>.)
+			//List<UserDetail> userDetails = hsession.createCriteria(UserDetail.class).add(Restrictions.eq("userName", user.getUserName())).list(); // .createQuery("FROM UserDetail")..list();
 			for (Iterator iterator = userDetails.iterator(); iterator.hasNext();) {
 				UserDetail userDetail = (UserDetail) iterator.next();
 				if (user.getUserName().equals(userDetail.getUserName())) {

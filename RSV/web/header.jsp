@@ -73,7 +73,7 @@ ul.errorMessage li {
 			<div class="right icons">
 				<div class="logout">
 					<s:if test="%{#session.get('USER') != null}">
-											Welcome <span><s:text name="#session.userName" /></span>
+											Welcome <span><s:text name="session.userName" /></span>
 						<br />
 						<s:a cssClass="fa-power-off c-red" href="logout.action">logout</s:a>
 					</s:if>
