@@ -26,7 +26,7 @@
     </Logger>
 
     <!-- Log JDBC bind parameters -->
-    <Logger name="org.hibernate.type.descriptor.sql" level="trace" additivity="false">
+    <Logger name="org.hibernate.type.descriptor.sql" level="debug" additivity="false">
       <AppenderRef ref="Console" />
       <AppenderRef ref="File" />
     </Logger>
